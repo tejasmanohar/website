@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Blueprint 0.5 - The Experiment (bjorkoy.com)</title>
+  <meta name="author" content="Olav Bjorkoy">
+  <meta name="description" content="Blueprint 0.5 - The Experiment - Olav Bjorkoy's blog on CSS, Blueprint, HTML, Ruby and anything in-between.">
+  <meta name="keywords" content="HTML, CSS, JS, Blueprint, Ruby, Rails, Olav Bjorkoy, Olav">
+  
+  <!-- <link href="/atom.xml" rel="alternate" title="bjorkoy.com" type="application/atom+xml"> -->
+  <link href="http://feeds.feedburner.com/bjorkoy" rel="alternate" title="bjorkoy.com" type="application/atom+xml">
+  <meta name="google-site-verification" content="7vDyCyvSym2pZLSBnjl1IrtN-hp00gqMfNG8fbHNXyM">
+  
+  <link rel="icon" type="image/png" href="http://bjorkoy.com/images/icon.png?8">
+  
+  <script type="text/javascript" src="/js/hyphenate.js"></script>
+  <script type="text/javascript" src="/js/width.js"></script>
+  <script type="text/javascript" src="http://use.typekit.com/zmq0szj.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      var postBody = document.getElementsByClassName('post')[0];
+      setTextMeasure(postBody);
+    }, false);
+  </script>
+  
+  <link rel="stylesheet" href="/css/reset.css" type="text/css">
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css">
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection">
+  <script src="/mentos/?js" type="text/javascript"></script>
+</head>
+<body id="bjorkoy-com">
+<div id="container" class="hyphenate">
+
+<ul id="menu">
+  <li><a href="http://bjorkoy.com">bjorkoy.com</a></li>
+  <li class="orn">★</li>
+  <li><a href="/archive.html">articles</a></li>
+  <li class="orn">★</li>
+  <li><a href="http://github.com/olav">projects</a></li>
+  <!--<li class="orn">★</li>-->
+  <!--<li><a href="http://twitter.com/vandelay">twitter</a></li>-->
+  <li class="orn">★</li>
+  <li><a href="/about.html">about</a></li>
+</ul>
+
+  
+  
+
+
+<div class="post">
+  <h2><span>Blueprint 0.5 - The Experiment</span></h2>
+  <div class="content">
+    <p>Today marks the release of <a href='http://code.google.com/p/blueprintcss/'>Blueprint</a>, version 0.5. This is a special release, as it is above all an experiment, trying out a few different techniques as we approach version 1.0.</p>
+
+<h3 id='the_grid'>The Grid</h3>
+
+<p>The grid in this release is upped from 14 to 24 columns. Now, before you all go haywire, consider the following:</p>
+
+<p>12 is quite certainly the best number of columns for a grid, mathematically speaking. It is dividable by both three and four, giving you lots of options on how you&#8217;d like to set up your layout.</p>
+
+<p>However, after trying out the 12 column scheme on a few sites, I believe it is too constricting. That is, the column count is too low. It was already too low when we were using 14, if you ask me, so 12 doesn&#8217;t seem completely right.</p>
+
+<p>That&#8217;s why I&#8217;ve gone for 24. Being 2 * 12, you get all the flexibility, with the added possibility of creating truly complex grid systems. And, if 12 is your preference, all you have to do is to double your desired span counts.</p>
+
+<p>But hey, Blueprint is about flexibility, not constraints. That&#8217;s why <a href='http://kematzy.com/'>Matz from kematzy.com</a> is the latest addition to the growing BP development team. He has created a wonderfully flexible <a href='http://kematzy.com/blueprint-generator/'>BP grid generator</a>, which lets you input your desired number of columns, margin between columns, and even your preferred total width, and outputs a nicely formatted and customized grid.css.</p>
+
+<p>So please, if 24 is not your bag, check out <a href='http://kematzy.com/blueprint-generator/'>Matz&#8217;s generator</a>.</p>
+
+<p><em>Also, the <code>first</code> class is no longer needed. :)</em></p>
+
+<h3 id='px_vs_em'>PX vs EM</h3>
+
+<p>Blueprint 0.4 introduced the use of em units for all vertical spacing, including line-heights and font sizes. However, in retrospect, this does not work as well as it should. While giving IE users the ability to resize text properly, the vertical flow and baseline was disrupted in nearly every browser except Firefox.</p>
+
+<p>I do believe the baseline is quite important, giving each page a great look and feel, so we&#8217;re going back to pixels in this release. Resizing might not work as well, but the baseline now looks perfect in nearly every browser. I think this is a fair trade.</p>
+
+<p>To accommodate those not happy with this, BP 0.4 will remain as a download on the Google Code site, so that you may easily make your own changes to stick with em&#8217;s.</p>
+
+<p>We do hope to return to using em&#8217;s one day, but that won&#8217;t happen until we can make them work correctly with the baseline. If anyone wants to tackle this issue, please feel free to do so. :)</p>
+
+<h3 id='fonts_for_the_typographically_literate'>Fonts for the typographically literate</h3>
+
+<p>Version 0.5 also sports a new set of default fonts. We figure that if you&#8217;ve gone so far as buy your own great fonts, you should also get to use them when you browse the web. Here&#8217;s the fonts that now gets set in typography.css:</p>
+
+<pre><code>h1,h2,h3,
+h4,h5,h6  { font-family: Constantia, &quot;Palatino Linotype&quot;, 
+            Palatino, Georgia, &quot;Times New Roman&quot;, Times, serif; }
+body      { font-family: Frutiger, Univers, &quot;Helvetica Neue&quot;, 
+            &quot;Lucida Grande&quot;, Calibri, Helvetica, Verdana, sans-serif; } 
+pre       { font-family: Corbel, Verdana, 
+            &quot;Bitstream Vera Sans&quot;, sans-serif; } 
+code      { font-family: Consolas, &quot;Bitstream Vera Sans Mono&quot;, 
+            &quot;Courier New&quot;, Monaco, Courier, monospace; } </code></pre>
+
+<p>This is also highly experimental, and the font choices are likely to change in future releases.</p>
+
+<h3 id='coming_in_06'>Coming in 0.6</h3>
+
+<p>A few things didn&#8217;t make it into this release. Most noticeably is the forms.css file. Created by <a href='http://kimjoar.net/'>Kim Joar Bekkelund</a>, this file aims to give you some great looking default forms, with support for fieldsets, buttons and more. Expect it to ship with BP 0.6.</p>
+
+<p>Another quite important feature that probably will be added to 0.6, is the use of an ie.css stylesheet, loaded with conditional comments, so that IE hacks stays in one place, and doesn&#8217;t clutter up our beautiful core files.</p>
+
+<h3 id='get_yer_blueprint_half_price'>Get yer Blueprint, half price!</h3>
+
+<p>So that&#8217;s that. Another release, another milestone on the way to Blueprint 1.0.</p>
+
+<p>As always, a <a href='http://code.google.com/p/blueprintcss/wiki/Tutorial'>tutorial</a>, <a href='http://bjorkoy.com/blueprint/sample.html'>example</a> <a href='http://bjorkoy.com/blueprint/typography-test.html'>files</a>, the <a href='http://code.google.com/p/blueprintcss/wiki/Contributors'>credits</a>, and the <a href='http://code.google.com/p/blueprintcss/downloads/list'>download</a> itself, are all on the <a href='http://code.google.com/p/blueprintcss/'>Google Code site</a>. So go ahead, and <a href='http://code.google.com/p/blueprintcss/downloads/list'>grab your own copy</a>. :)</p>
+  </div>
+  <p class="date">~ 28 Aug 2007</p>
+</div>    
+
+</div>
+</body>
+</html>

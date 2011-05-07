@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSS 101 - Opposing Floats (bjorkoy.com)</title>
+  <meta name="author" content="Olav Bjorkoy">
+  <meta name="description" content="CSS 101 - Opposing Floats - Olav Bjorkoy's blog on CSS, Blueprint, HTML, Ruby and anything in-between.">
+  <meta name="keywords" content="HTML, CSS, JS, Blueprint, Ruby, Rails, Olav Bjorkoy, Olav">
+  
+  <!-- <link href="/atom.xml" rel="alternate" title="bjorkoy.com" type="application/atom+xml"> -->
+  <link href="http://feeds.feedburner.com/bjorkoy" rel="alternate" title="bjorkoy.com" type="application/atom+xml">
+  <meta name="google-site-verification" content="7vDyCyvSym2pZLSBnjl1IrtN-hp00gqMfNG8fbHNXyM">
+  
+  <link rel="icon" type="image/png" href="http://bjorkoy.com/images/icon.png?8">
+  
+  <script type="text/javascript" src="/js/hyphenate.js"></script>
+  <script type="text/javascript" src="/js/width.js"></script>
+  <script type="text/javascript" src="http://use.typekit.com/zmq0szj.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      var postBody = document.getElementsByClassName('post')[0];
+      setTextMeasure(postBody);
+    }, false);
+  </script>
+  
+  <link rel="stylesheet" href="/css/reset.css" type="text/css">
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css">
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection">
+  <script src="/mentos/?js" type="text/javascript"></script>
+</head>
+<body id="bjorkoy-com">
+<div id="container" class="hyphenate">
+
+<ul id="menu">
+  <li><a href="http://bjorkoy.com">bjorkoy.com</a></li>
+  <li class="orn">★</li>
+  <li><a href="/archive.html">articles</a></li>
+  <li class="orn">★</li>
+  <li><a href="http://github.com/olav">projects</a></li>
+  <!--<li class="orn">★</li>-->
+  <!--<li><a href="http://twitter.com/vandelay">twitter</a></li>-->
+  <li class="orn">★</li>
+  <li><a href="/about.html">about</a></li>
+</ul>
+
+  
+  
+
+
+<div class="post">
+  <h2><span>CSS 101 - Opposing Floats</span></h2>
+  <div class="content">
+    <p>One of the CSS techniques most prone to failing in Internet Explorer 6 is floating elements up against each other.</p>
+
+<p>For instance, you might have a main-content div, and a sidebar div. You then float both of these to the left, and give one of them some margin on the left or right hand side.</p>
+
+<p>Bad idea! This often induces one of IE6&#8217;s many CSS layout bugs, so here&#8217;s a better way:</p>
+
+<p>Float the two divs to different sides. That is, give the first column a <code>float:left</code>, and the second column a <code>float:right</code>.</p>
+
+<p>Apply a width to each column, so that the whitespace in between the columns is as wide as the margin you originally applied.</p>
+
+<p>Now, the columns aren&#8217;t even touching, ensuring that IE6 won&#8217;t push one column down below the other.</p>
+
+<p>Just like that you&#8217;ve accomplished the same exact layout, without the need to float divs up against each other, making for a much more robust layout.</p>
+
+<p>See also:</p>
+
+<ul>
+<li><a href='http://bjorkoy.com/past/2007/8/30/css_101_theres_always_another/'>CSS 101: There&#8217;s always another way</a></li>
+
+<li><a href='http://bjorkoy.com/past/2007/8/26/css_101_group_by_layout/'>CSS 101: Group by layout</a></li>
+</ul>
+  </div>
+  <p class="date">~ 07 Sep 2007</p>
+</div>    
+
+</div>
+</body>
+</html>

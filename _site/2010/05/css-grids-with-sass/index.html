@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Semantic CSS Grids With SASS (bjorkoy.com)</title>
+  <meta name="author" content="Olav Bjorkoy">
+  <meta name="description" content="Semantic CSS Grids With SASS - Olav Bjorkoy's blog on CSS, Blueprint, HTML, Ruby and anything in-between.">
+  <meta name="keywords" content="HTML, CSS, JS, Blueprint, Ruby, Rails, Olav Bjorkoy, Olav">
+  
+  <!-- <link href="/atom.xml" rel="alternate" title="bjorkoy.com" type="application/atom+xml"> -->
+  <link href="http://feeds.feedburner.com/bjorkoy" rel="alternate" title="bjorkoy.com" type="application/atom+xml">
+  <meta name="google-site-verification" content="7vDyCyvSym2pZLSBnjl1IrtN-hp00gqMfNG8fbHNXyM">
+  
+  <link rel="icon" type="image/png" href="http://bjorkoy.com/images/icon.png?8">
+  
+  <script type="text/javascript" src="/js/hyphenate.js"></script>
+  <script type="text/javascript" src="/js/width.js"></script>
+  <script type="text/javascript" src="http://use.typekit.com/zmq0szj.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      var postBody = document.getElementsByClassName('post')[0];
+      setTextMeasure(postBody);
+    }, false);
+  </script>
+  
+  <link rel="stylesheet" href="/css/reset.css" type="text/css">
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css">
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection">
+  <script src="/mentos/?js" type="text/javascript"></script>
+</head>
+<body id="bjorkoy-com">
+<div id="container" class="hyphenate">
+
+<ul id="menu">
+  <li><a href="http://bjorkoy.com">bjorkoy.com</a></li>
+  <li class="orn">★</li>
+  <li><a href="/archive.html">articles</a></li>
+  <li class="orn">★</li>
+  <li><a href="http://github.com/olav">projects</a></li>
+  <!--<li class="orn">★</li>-->
+  <!--<li><a href="http://twitter.com/vandelay">twitter</a></li>-->
+  <li class="orn">★</li>
+  <li><a href="/about.html">about</a></li>
+</ul>
+
+  
+  
+
+
+<div class="post">
+  <h2><span>Semantic CSS Grids With SASS</span></h2>
+  <div class="content">
+    <p>You design websites, and since you&#8217;re brimming with empathy, you want to use a grid-based layout to ensure a minimum amount of confused users. Great! However, you also design a lot of websites, and find yourself doing the same operations for setting up a basic grid at each ⌘+N. Not good.</p>
+
+<p>The way to fix this is a sort of design framework. The problem with such a framework has often been mixing presentational logic with your sweet HTML hierarchy. Nuts to that, you say, I&#8217;d like both my CSS and HTML clean and semantically correct. Well, here&#8217;s a way to get the best of both worlds.</p>
+
+<p>Using <a href='http://sass-lang.com/'>SASS</a>, or any other equivalent CSS extensions, defining functions and variables lets you set up a grid while you stay away from anything less than semantically correct. Here&#8217;s a setup of variables and mixins I&#8217;ve been using lately:</p>
+<div class='highlight'><pre><code class='css'><span class='c'>/*</span>
+<span class='c'>  Choose a grid width, the number of columns and the margin between columns.</span>
+<span class='c'>  The result of the following equation has to be an integer, not a fraction:</span>
+<span class='c'>  </span>
+<span class='c'>  (width - (columns - 1) * col_margin) / columns = N</span>
+<span class='c'>*/</span>
+
+<span class='err'>$</span><span class='nt'>width</span><span class='o'>:</span> <span class='nt'>960px</span><span class='o'>;</span>   <span class='c'>/* total with of page */</span>
+<span class='err'>$</span><span class='nt'>columns</span><span class='o'>:</span> <span class='nt'>24</span><span class='o'>;</span>    <span class='c'>/* number of columns */</span>
+<span class='err'>$</span><span class='nt'>col_margin</span><span class='o'>:</span> <span class='nt'>0</span><span class='o'>;</span>  <span class='c'>/* margin between columns */</span>
+
+<span class='c'>/* math magic */</span>
+<span class='err'>$</span><span class='nt'>col_width</span><span class='o'>:</span> <span class='o'>(</span><span class='err'>$</span><span class='nt'>width</span> <span class='nt'>-</span> <span class='o'>(</span><span class='err'>$</span><span class='nt'>col_margin</span> <span class='o'>*</span> <span class='o'>(</span><span class='err'>$</span><span class='nt'>columns</span> <span class='nt'>-</span> <span class='nt'>1</span><span class='o'>)))</span> <span class='o'>/</span> <span class='err'>$</span><span class='nt'>columns</span><span class='o'>;</span>
+<span class='err'>$</span><span class='nt'>col_total_width</span><span class='o'>:</span> <span class='err'>$</span><span class='nt'>col_width</span> <span class='o'>+</span> <span class='err'>$</span><span class='nt'>col_margin</span><span class='o'>;</span>  
+
+<span class='c'>/* create row div */</span>
+<span class='k'>@mixin</span> <span class='nt'>row</span><span class='o'>()</span> <span class='p'>{</span>
+  <span class='nt'>float</span><span class='o'>:</span> <span class='nt'>left</span><span class='o'>;</span>
+  <span class='nt'>clear</span><span class='o'>:</span> <span class='nt'>both</span><span class='o'>;</span>
+  <span class='nt'>width</span><span class='o'>:</span> <span class='err'>$</span><span class='nt'>width</span><span class='o'>;</span>
+<span class='p'>}</span>
+
+<span class='c'>/* create a column div */</span>
+<span class='k'>@mixin</span> <span class='nt'>col</span><span class='o'>(</span><span class='err'>$</span><span class='nt'>n</span><span class='o'>:</span> <span class='nt'>1</span><span class='o'>)</span> <span class='p'>{</span>
+  <span class='nt'>float</span><span class='o'>:</span> <span class='nt'>left</span><span class='o'>;</span>
+  <span class='k'>@include</span> <span class='nt'>span</span><span class='o'>(</span><span class='err'>$</span><span class='nt'>n</span><span class='o'>)</span><span class='p'>;</span>
+<span class='p'>}</span>
+
+<span class='c'>/* make an element span n columns */</span>
+<span class='k'>@mixin</span> <span class='nt'>span</span><span class='o'>(</span><span class='err'>$</span><span class='nt'>n</span><span class='o'>:</span> <span class='nt'>1</span><span class='o'>)</span> <span class='p'>{</span>
+  <span class='nt'>width</span><span class='o'>:</span> <span class='o'>(</span><span class='err'>$</span><span class='nt'>n</span> <span class='o'>*</span> <span class='err'>$</span><span class='nt'>col_width</span><span class='o'>)</span> <span class='o'>+</span> <span class='o'>((</span><span class='err'>$</span><span class='nt'>n</span> <span class='nt'>-</span> <span class='nt'>1</span><span class='o'>)</span> <span class='o'>*</span> <span class='err'>$</span><span class='nt'>col_margin</span><span class='o'>);</span>
+  <span class='k'>@if</span> <span class='err'>$</span><span class='nt'>n</span> <span class='o'>==</span> <span class='err'>$</span><span class='nt'>columns</span> <span class='p'>{</span>
+    <span class='nt'>margin-right</span><span class='o'>:</span> <span class='nt'>0</span><span class='o'>;</span>
+  <span class='p'>}</span> <span class='k'>@else</span> <span class='p'>{</span>
+    <span class='nt'>margin-right</span><span class='o'>:</span> <span class='err'>$</span><span class='nt'>col_margin</span><span class='o'>;</span>
+  <span class='p'>}</span>
+<span class='p'>}</span>
+
+<span class='c'>/* the last column in a row needs this */</span>
+<span class='k'>@mixin</span> <span class='nt'>last</span><span class='o'>()</span> <span class='p'>{</span>
+  <span class='nt'>margin-right</span><span class='o'>:</span> <span class='nt'>0</span><span class='o'>;</span>
+<span class='p'>}</span>
+
+<span class='c'>/* prepend n blank columns  */</span>
+<span class='k'>@mixin</span> <span class='nt'>prepend</span><span class='o'>(</span><span class='err'>$</span><span class='nt'>n</span><span class='o'>:</span> <span class='nt'>1</span><span class='o'>)</span> <span class='p'>{</span>
+  <span class='nt'>margin-left</span><span class='o'>:</span> <span class='err'>$</span><span class='nt'>col_total_width</span> <span class='o'>*</span> <span class='err'>$</span><span class='nt'>n</span>
+<span class='p'>}</span>
+
+<span class='c'>/* append n blank columns */</span>
+<span class='k'>@mixin</span> <span class='nt'>append</span><span class='o'>(</span><span class='err'>$</span><span class='nt'>n</span><span class='o'>:</span> <span class='nt'>1</span><span class='o'>)</span> <span class='p'>{</span>
+  <span class='nt'>margin-right</span><span class='o'>:</span> <span class='err'>$</span><span class='nt'>col_total_width</span> <span class='o'>*</span> <span class='err'>$</span><span class='nt'>n</span> <span class='o'>+</span> <span class='err'>$</span><span class='nt'>col_margin</span>
+<span class='p'>}</span>
+</code></pre>
+</div>
+<p>The attentive reader will note I&#8217;m using the new <a href='http://sass-lang.com/docs/yardoc/file.SASS_CHANGELOG.html#scss_sassy_css'>SCSS</a> syntax found in SASS 3. This is great, since the syntax is completely compatible with CSS (at least CSS 3), ensuring sweet validation of your files. Because these are mixins, your CSS classes and ID&#8217;s can still retain semantic names, and the presentation logic remains where it should be:</p>
+
+<p><div class='highlight'><pre><code class='css'><span class='nc'>.section</span> <span class='p'>{</span> <span class='o'>@</span><span class='n'>include</span> <span class='n'>row</span><span class='p'>;</span> <span class='p'>}</span>
+<span class='nc'>.section</span> <span class='nc'>.main</span> <span class='p'>{</span> <span class='o'>@</span><span class='n'>include</span> <span class='n'>col</span><span class='p'>(</span><span class='m'>18</span><span class='p'>);</span> <span class='p'>}</span>
+<span class='nc'>.section</span> <span class='nc'>.sidebar</span> <span class='p'>{</span> <span class='o'>@</span><span class='n'>include</span> <span class='n'>col</span><span class='p'>(</span><span class='m'>6</span><span class='p'>);</span> <span class='o'>@</span><span class='n'>include</span> <span class='n'>last</span><span class='p'>;</span> <span class='p'>}</span>
+<span class='nc'>.section</span> <span class='nc'>.promo</span> <span class='p'>{</span> 
+  <span class='o'>@</span><span class='n'>include</span> <span class='n'>col</span><span class='p'>(</span><span class='m'>12</span><span class='p'>);</span> 
+  <span class='o'>@</span><span class='n'>include</span> <span class='n'>prepend</span><span class='p'>(</span><span class='m'>6</span><span class='p'>);</span> 
+  <span class='o'>@</span><span class='n'>include</span> <span class='n'>append</span><span class='p'>(</span><span class='m'>6</span><span class='p'>);</span> 
+  <span class='o'>@</span><span class='n'>include</span> <span class='n'>last</span><span class='p'>;</span>
+<span class='p'>}</span>
+</code></pre>
+</div></p>
+
+<p>If you&#8217;re making an extensive site from scratch, or rarely doing new projects, I would suggest using the manual approach. This technique is more for those of us that sometimes needs a conveyor-belt type of web design output. Either way, the point to remember is that a lot of CSS logic lends itself well to programming, and by using an extension such as SASS, much manual labour can be offset by functions and variables.</p>
+  </div>
+  <p class="date">~ 22 May 2010</p>
+</div>    
+
+</div>
+</body>
+</html>

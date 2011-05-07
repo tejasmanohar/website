@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Blogging With Jekyll, Git and a VPS (bjorkoy.com)</title>
+  <meta name="author" content="Olav Bjorkoy">
+  <meta name="description" content="Blogging With Jekyll, Git and a VPS - Olav Bjorkoy's blog on CSS, Blueprint, HTML, Ruby and anything in-between.">
+  <meta name="keywords" content="HTML, CSS, JS, Blueprint, Ruby, Rails, Olav Bjorkoy, Olav">
+  
+  <!-- <link href="/atom.xml" rel="alternate" title="bjorkoy.com" type="application/atom+xml"> -->
+  <link href="http://feeds.feedburner.com/bjorkoy" rel="alternate" title="bjorkoy.com" type="application/atom+xml">
+  <meta name="google-site-verification" content="7vDyCyvSym2pZLSBnjl1IrtN-hp00gqMfNG8fbHNXyM">
+  
+  <link rel="icon" type="image/png" href="http://bjorkoy.com/images/icon.png?8">
+  
+  <script type="text/javascript" src="/js/hyphenate.js"></script>
+  <script type="text/javascript" src="/js/width.js"></script>
+  <script type="text/javascript" src="http://use.typekit.com/zmq0szj.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      var postBody = document.getElementsByClassName('post')[0];
+      setTextMeasure(postBody);
+    }, false);
+  </script>
+  
+  <link rel="stylesheet" href="/css/reset.css" type="text/css">
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css">
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection">
+  <script src="/mentos/?js" type="text/javascript"></script>
+</head>
+<body id="bjorkoy-com">
+<div id="container" class="hyphenate">
+
+<ul id="menu">
+  <li><a href="http://bjorkoy.com">bjorkoy.com</a></li>
+  <li class="orn">★</li>
+  <li><a href="/archive.html">articles</a></li>
+  <li class="orn">★</li>
+  <li><a href="http://github.com/olav">projects</a></li>
+  <!--<li class="orn">★</li>-->
+  <!--<li><a href="http://twitter.com/vandelay">twitter</a></li>-->
+  <li class="orn">★</li>
+  <li><a href="/about.html">about</a></li>
+</ul>
+
+  
+  
+
+
+<div class="post">
+  <h2><span>Blogging With Jekyll, Git and a VPS</span></h2>
+  <div class="content">
+    <p>Welcome to another installment in the never-ending story of my quest for the perfect blogging setup. This time, we stray far from the conventional use of content management systems, shared hosts and database storage.</p>
+
+<p>Yes, like so many others, I&#8217;m jumping on the bandwagon of using a local setup for generating blog posts, and then publishing the final HTML to my server using Git. Here&#8217;s the setup:</p>
+
+<ol>
+<li>Every blog post is a new file on my machine, ensuring great portability and an easy transition to future systems (yes, it will happen). Post files can be anything from markdown and textile, to html and plain source code.</li>
+
+<li>To generate the final site, each post and page is processed by <a href='http://github.com/mojombo/jekyll'>Jekyll</a>, which has support for layouts, partials, syntax highlighting, automatic regeneration and so forth.</li>
+
+<li>The finished HTML is pushed to a git repository on my <a href='http://www.slicehost.com/'>Slicehost</a> VPS, which gives me full control over the final result.</li>
+</ol>
+
+<p>You can probably see the benefits and drawbacks of this system, so instead of listing pros and cons, I&#8217;ll show you how to set it up.</p>
+
+<p>Jekyll has a great <a href='http://wiki.github.com/mojombo/jekyll/'>wiki</a> describing its many features. You&#8217;ll also find examples of how others have customized their installations in the &#8220;sites&#8221; section. The only mildly interesting thing I did was to make a script for quickly creating new blog post files:</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'># Create new jekyll post and open in textmate</span>
+<span class='c1'># $ ruby _new.rb This is the title</span>
+
+<span class='c1'># The arguments form the title</span>
+<span class='k'>unless</span> <span class='no'>ARGV</span><span class='o'>[</span><span class='mi'>0</span><span class='o'>]</span>
+  <span class='k'>raise</span> <span class='s2'>&quot;Please provide a post title.&quot;</span>
+<span class='k'>end</span>
+
+<span class='c1'># Create a URL slug from the title</span>
+<span class='k'>def</span> <span class='nf'>slugify</span><span class='p'>(</span><span class='n'>title</span><span class='p'>)</span>
+    <span class='n'>str</span> <span class='o'>=</span> <span class='n'>title</span><span class='o'>.</span><span class='n'>dup</span>
+    <span class='n'>str</span><span class='o'>.</span><span class='n'>gsub!</span><span class='p'>(</span><span class='sr'>/[^a-zA-Z0-9 ]/</span><span class='p'>,</span><span class='s2'>&quot;&quot;</span><span class='p'>)</span>
+    <span class='n'>str</span><span class='o'>.</span><span class='n'>gsub!</span><span class='p'>(</span><span class='sr'>/[ ]+/</span><span class='p'>,</span><span class='s2'>&quot; &quot;</span><span class='p'>)</span>
+    <span class='n'>str</span><span class='o'>.</span><span class='n'>gsub!</span><span class='p'>(</span><span class='sr'>/ /</span><span class='p'>,</span><span class='s2'>&quot;-&quot;</span><span class='p'>)</span>
+    <span class='n'>str</span><span class='o'>.</span><span class='n'>downcase!</span>
+    <span class='n'>str</span>
+<span class='k'>end</span>
+
+<span class='c1'># Create parameters</span>
+<span class='n'>title</span>  <span class='o'>=</span> <span class='no'>ARGV</span><span class='o'>.</span><span class='n'>join</span><span class='p'>(</span><span class='s1'>&#39; &#39;</span><span class='p'>)</span>
+<span class='n'>slug</span>   <span class='o'>=</span> <span class='n'>slugify</span><span class='p'>(</span><span class='n'>title</span><span class='p'>)</span>
+<span class='n'>prefix</span> <span class='o'>=</span> <span class='no'>Time</span><span class='o'>.</span><span class='n'>new</span><span class='o'>.</span><span class='n'>strftime</span><span class='p'>(</span><span class='s2'>&quot;%Y-%m-%d&quot;</span><span class='p'>)</span>
+<span class='n'>file</span>   <span class='o'>=</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>prefix</span><span class='si'>}</span><span class='s2'>-</span><span class='si'>#{</span><span class='n'>slug</span><span class='si'>}</span><span class='s2'>.markdown&quot;</span>
+<span class='n'>path</span>   <span class='o'>=</span> <span class='no'>File</span><span class='o'>.</span><span class='n'>join</span><span class='p'>(</span><span class='no'>File</span><span class='o'>.</span><span class='n'>dirname</span><span class='p'>(</span><span class='bp'>__FILE__</span><span class='p'>),</span> <span class='s2'>&quot;_posts/</span><span class='si'>#{</span><span class='n'>year</span><span class='si'>}</span><span class='s2'>/</span><span class='si'>#{</span><span class='n'>filename</span><span class='si'>}</span><span class='s2'>&quot;</span><span class='p'>)</span>
+<span class='n'>text</span>   <span class='o'>=</span> <span class='o'>&lt;&lt;-</span><span class='no'>eos</span>
+<span class='sh'>---</span>
+<span class='sh'>title: #{title}</span>
+<span class='sh'>layout: post</span>
+<span class='sh'>---</span>
+
+<span class='no'>eos</span>
+
+<span class='c1'># Create a new file and open it in textmate</span>
+<span class='no'>File</span><span class='o'>.</span><span class='n'>open</span><span class='p'>(</span><span class='n'>path</span><span class='p'>,</span> <span class='s1'>&#39;w&#39;</span><span class='p'>)</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>f</span><span class='o'>|</span> <span class='n'>f</span><span class='o'>.</span><span class='n'>write</span><span class='p'>(</span><span class='n'>text</span><span class='p'>)</span> <span class='p'>}</span>
+<span class='nb'>system</span><span class='p'>(</span><span class='s2'>&quot;mate </span><span class='si'>#{</span><span class='n'>path</span><span class='si'>}</span><span class='s2'>&quot;</span><span class='p'>)</span>
+</code></pre>
+</div>
+<p>By the way: Jekyll has built in support for using <a href='http://en.wikipedia.org/wiki/Latent_semantic_indexing'>latent semantic indexing</a> to create lists of related posts. It&#8217;s a slow implementation of a computationally demanding technique, but at the same time, very cool.</p>
+
+<p>When jekyll has generated the html in its &#8220;_site&#8221; folder, it&#8217;s time to upload the new post to the web server.</p>
+
+<p>To upload new content to the server, I use the setup described in <a href='http://matedriven.com.ar/2009/04/28/using-git-to-maintain-your-blog.html'>this guide</a>. Three distinct git repositories are established to provide the perfect workflow, where publishing a post is as easy as committing and pushing the new post to the server.</p>
+
+<p>My local copy is stored in the first repo. On the server, there is a &#8220;live&#8221; repo, which is the site served by apache, and a &#8220;base&#8221; repo which facilitates synchronization between the two other repos. My local changes are pushed to the base repo, which tells the live repo to update its content. The point is to avoid pushing content to a repo containing a working copy - using three repos is way easier. The guide has all the details if you wan&#8217;t more on this setup.</p>
+
+<p>All that&#8217;s left is creating a virtual host in apache, it&#8217;s document root pointing to the &#8220;_site&#8221; folder in the live repo. My server also have PHP and MySQL installed, so that my <a href='http://haveamint.com/'>Mint</a> installation can reside in the same repo as the rest of the jekyll files. Sweet!</p>
+
+<p>There&#8217;s something greatly reassuring about having a separate markdown file for each blog post, a point underlined by the annoying xml-parsing I did to migrate my old posts into this new system. My posts are safer than ever and can be written in any environment I see fit. In the end, this is a system only a programmer would love, but also the only system I, as a programmer, do love.</p>
+  </div>
+  <p class="date">~ 15 May 2010</p>
+</div>    
+
+</div>
+</body>
+</html>

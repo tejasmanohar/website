@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Battle comment spam with an extra form field (bjorkoy.com)</title>
+  <meta name="author" content="Olav Bjorkoy">
+  <meta name="description" content="Battle comment spam with an extra form field - Olav Bjorkoy's blog on CSS, Blueprint, HTML, Ruby and anything in-between.">
+  <meta name="keywords" content="HTML, CSS, JS, Blueprint, Ruby, Rails, Olav Bjorkoy, Olav">
+  
+  <!-- <link href="/atom.xml" rel="alternate" title="bjorkoy.com" type="application/atom+xml"> -->
+  <link href="http://feeds.feedburner.com/bjorkoy" rel="alternate" title="bjorkoy.com" type="application/atom+xml">
+  <meta name="google-site-verification" content="7vDyCyvSym2pZLSBnjl1IrtN-hp00gqMfNG8fbHNXyM">
+  
+  <link rel="icon" type="image/png" href="http://bjorkoy.com/images/icon.png?8">
+  
+  <script type="text/javascript" src="/js/hyphenate.js"></script>
+  <script type="text/javascript" src="/js/width.js"></script>
+  <script type="text/javascript" src="http://use.typekit.com/zmq0szj.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      var postBody = document.getElementsByClassName('post')[0];
+      setTextMeasure(postBody);
+    }, false);
+  </script>
+  
+  <link rel="stylesheet" href="/css/reset.css" type="text/css">
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css">
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection">
+  <script src="/mentos/?js" type="text/javascript"></script>
+</head>
+<body id="bjorkoy-com">
+<div id="container" class="hyphenate">
+
+<ul id="menu">
+  <li><a href="http://bjorkoy.com">bjorkoy.com</a></li>
+  <li class="orn">★</li>
+  <li><a href="/archive.html">articles</a></li>
+  <li class="orn">★</li>
+  <li><a href="http://github.com/olav">projects</a></li>
+  <!--<li class="orn">★</li>-->
+  <!--<li><a href="http://twitter.com/vandelay">twitter</a></li>-->
+  <li class="orn">★</li>
+  <li><a href="/about.html">about</a></li>
+</ul>
+
+  
+  
+
+
+<div class="post">
+  <h2><span>Battle comment spam with an extra form field</span></h2>
+  <div class="content">
+    <p>I was introduced to an ingenious solution to the problem that is comment spam.</p>
+
+<p>All you have to do is add an extra input field to your comment form. The field should have a name that you won&#8217;t use or save, but at the same time, have a name that it&#8217;s certain that a spambot will fill in. Example:</p>
+
+<pre><code>&lt;input type=&quot;text&quot; name=&quot;lastname&quot; id=&quot;lastname&quot; /&gt;</code></pre>
+
+<p>I don&#8217;t store any users last name with a comment, so that should do just fine. Now comes the really clever part. Add a CSS rule to your stylesheet which hides this field from regular users, while still leaving it in the html for every spambot to see:</p>
+
+<pre><code>input#lastname { display:none; }</code></pre>
+
+<p>Lastly, change the part of your site that adds a comment to your database so that a comment is not added if the field &#8220;lastname&#8221; is filled in.</p>
+
+<p>And there you go: nearly perfect comment spam protection. No need for bayesian filters, API-keys or (gasp) captchas. I can&#8217;t understand why this approach isn&#8217;t common, so what have I overlooked? :)</p>
+
+<p><strong>Update:</strong> I just got spammed again, but I&#8217;m not sure what happened. The spam comments was actually left on an entry where the comments are closed. Alas, I must dig deeper to unravel this mystery.</p>
+
+<p>I still think the technique outlined in this post will work, and there&#8217;s been some interesting additions made in the comments.</p>
+  </div>
+  <p class="date">~ 01 Aug 2007</p>
+</div>    
+
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+---
+title: A new hope
+layout: post
+---
+
+Apparently, a new blog post from me requires a change in the underlying publishing system. As I've now switched from my own home brew to [SimpleLog][1] by [Garrett Murray][2], it's then time for another post. SimpleLog seems like a great app so far, and I hope it'll re-invigorate my interest in blogging. (I know, cheesy).
+
+  [1]: http://simplelog.net/
+  [2]: http://garrettmurray.net/
+
+SimpleLog is the kind of blogging system I've been looking for. It's light-weight while still having all the features I'll need (although it could have been even lighter). It also seems to be well coded, with a lot of smart solutions; a great way to learn more about Rails, in other words.
+
+I'm mocking up a new design for this third incarnation of the blÃ¸g, so stay tuned for that. :) For now, enjoy my ridiculously wide-read post on PNG transparency in IE6.
+

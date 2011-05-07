@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Page Width and Device Independence (bjorkoy.com)</title>
+  <meta name="author" content="Olav Bjorkoy">
+  <meta name="description" content="Page Width and Device Independence - Olav Bjorkoy's blog on CSS, Blueprint, HTML, Ruby and anything in-between.">
+  <meta name="keywords" content="HTML, CSS, JS, Blueprint, Ruby, Rails, Olav Bjorkoy, Olav">
+  
+  <!-- <link href="/atom.xml" rel="alternate" title="bjorkoy.com" type="application/atom+xml"> -->
+  <link href="http://feeds.feedburner.com/bjorkoy" rel="alternate" title="bjorkoy.com" type="application/atom+xml">
+  <meta name="google-site-verification" content="7vDyCyvSym2pZLSBnjl1IrtN-hp00gqMfNG8fbHNXyM">
+  
+  <link rel="icon" type="image/png" href="http://bjorkoy.com/images/icon.png?8">
+  
+  <script type="text/javascript" src="/js/hyphenate.js"></script>
+  <script type="text/javascript" src="/js/width.js"></script>
+  <script type="text/javascript" src="http://use.typekit.com/zmq0szj.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      var postBody = document.getElementsByClassName('post')[0];
+      setTextMeasure(postBody);
+    }, false);
+  </script>
+  
+  <link rel="stylesheet" href="/css/reset.css" type="text/css">
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css">
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection">
+  <script src="/mentos/?js" type="text/javascript"></script>
+</head>
+<body id="bjorkoy-com">
+<div id="container" class="hyphenate">
+
+<ul id="menu">
+  <li><a href="http://bjorkoy.com">bjorkoy.com</a></li>
+  <li class="orn">★</li>
+  <li><a href="/archive.html">articles</a></li>
+  <li class="orn">★</li>
+  <li><a href="http://github.com/olav">projects</a></li>
+  <!--<li class="orn">★</li>-->
+  <!--<li><a href="http://twitter.com/vandelay">twitter</a></li>-->
+  <li class="orn">★</li>
+  <li><a href="/about.html">about</a></li>
+</ul>
+
+  
+  
+
+
+<div class="post">
+  <h2><span>Page Width and Device Independence</span></h2>
+  <div class="content">
+    <p>Page width has to be one of the most debated aspects of web design. The discussion used to revolve around fixed versus fluid layouts, and in the case of fixed layouts, the maximum width a website could use without invoking the dreaded horizontal scrollbar.</p>
+
+<p>Recently the notion of device-specific layouts and page widths has been all the rage, through the use of media queries, user agent matching and dynamic layouts with Javascript. For instance, by using CSS media queries, a site can serve up different layouts to phones, tablets and computers based on their respective screen sizes.</p>
+
+<p>Altering content based on screen width is a wonderful and powerful feature, but there&#8217;s a few caveats to remember. If you&#8217;re designing a typical website, but have a specific device in mind, you might be doing something wrong.</p>
+
+<p>There&#8217;s an ever increasing spectrum of device screen sizes, and while some devices are more popular than others, using exact matching to customize a layout to a specific device brings back memories of &#8220;this site can only be viewed through IE6 or newer&#8221;. Common sense dictates that the spectrum will become more homogenous over time. Right now, there seems to be three main screen width steps represented by phones, tablets and computers, but new devices will surely pop up in between these ill-defined plateaus.</p>
+
+<p>In designers terms, this means that a site should work fine with any screen width, just as it should work fine with any screen height. We can expect users to scroll vertically, but expecting users to continuously scroll in two dimensions is no solution. Page width has to be device independent, not device-specific.</p>
+
+<p>The ideal solution then seems to be to use a fluid layout, with tools such as media queries to fluidly add, move or remove elements as the screen width changes, but not to identify the actual device in use. This way, the layout is not dependent on any one device or window size, but usable on any current or future device screen.</p>
+  </div>
+  <p class="date">~ 03 Sep 2010</p>
+</div>    
+
+</div>
+</body>
+</html>
