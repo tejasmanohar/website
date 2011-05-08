@@ -6,17 +6,15 @@ p { line-height:1.7; margin-bottom:1em; text-align:justify; font-size:1.2em; }
 a { color:#900; text-decoration:none; border-bottom:1px dotted #ccc; }
 a:hover { color:#000; border-bottom:1px solid #000; }
 pre { padding:0 0 0 28px; margin:30px 0; font-size:14px; line-height:1.5; border-left:2px solid #eee; overflow:hidden; }
-div + p { text-indent:0; }
 ul,ol { line-height:1.7; list-style-type:disc; font-size:1.2em; margin:30px 0 30px 30px; }
-h2 { margin-bottom:1.5em; font-size:2em; text-align:center; font-weight:normal; font-family: "palatino","times",serif; }
+h2,h3 { margin-bottom:1.5em; font-size:2em; text-align:center; font-weight:normal; font-family: "palatino","times",serif; }
+h3 { font-size:1.4em; font-style:italic; padding:2em 0 0 0; }
 h2 a { color:#000; }
-h3,h4,h5,h6 { text-transform:uppercase; padding:1em 0; font-weight:normal; font-size:1.2em; letter-spacing:1px; color:#999; }
-h2 + p, h3 + p, h4 + p, h5 + p, h6 + p { text-indent:0; }
+h4,h5,h6 { text-transform:uppercase; padding:1em 0; font-weight:normal; font-size:1.2em; letter-spacing:1px; color:#999; }
 h2 + ul, h3 + ul, h5 + ul, h6 + ul { margin-top:0; }
-ul + p, ol + p, pre + p { text-indent:0; }
 blockquote { margin:30px 0 30px 30px; font-style:italic; }
 
-#container { max-width:40em; margin:0 auto; }
+#container { max-width:40em; min-width:40em; margin:0 auto; }
 #menu { text-align:center; margin:0 0 4em 0; }
 #menu li { display:inline; margin:0 1px; font-size:16px; } 
 #menu a { border:none; text-transform:uppercase; color:#000; text-shadow:0 0 10px #999; }
