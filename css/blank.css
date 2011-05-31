@@ -1,14 +1,17 @@
 body { 
   margin:0;
-  padding:5% 10%;
-  font-family: "Palatino Linotype", Palatino, "Times New Roman", "Nimbus Roman No9 L", serif;
+  padding:5%;
+  font-size:1em;
+  font-family: "Times New Roman", "Palatino Linotype", Palatino, "Nimbus Roman No9 L", serif;
 }
 
 h1,h2,h3,h4,h5,h6 {
   font-weight:normal;
-  padding-top:20px;
-  font-family: Baskerville, "Baskerville Old Face", "Times New Roman", "Nimbus Roman No9 L", serif;
+  padding-top:2em;
+  font-family:Baskerville, "Baskerville Old Face", "Times New Roman", "Nimbus Roman No9 L", serif;
 }
+h2 { font-size:1.6em; }
+h3 { font-size:1.2em; }
 
 p,li {
   line-height:1.4;
@@ -29,21 +32,21 @@ a {
 pre { 
   padding:0 0 0 1em; 
   margin:1em 0; 
-  font-size:12px; 
+  font-size:0.9em; 
   line-height:1.5; 
-  border-left:2px solid #eee; 
+  border-left:0.1em solid #eee; 
   overflow:hidden; 
 }
 
 #menu { 
-  margin:0 0 3em 0; 
+  margin:0; 
   padding:0; 
   font-family: Baskerville, "Baskerville Old Face", "Times New Roman", "Nimbus Roman No9 L", serif;
 }
 #menu li { 
   display:inline; 
   margin:0 1px; 
-  font-size:14px; 
+  font-size:0.9em; 
 } 
 #menu a { 
   border:none; 
@@ -54,6 +57,6 @@ pre {
   border-bottom:1px solid #000; 
 }
 
-li.orn { color:#ddd; font-size:80%; }
+li.orn { color:#ccc; font-size:80%; }
 p.date { color:#ccc; }
 
