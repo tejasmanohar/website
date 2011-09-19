@@ -1,6 +1,6 @@
 ---
 title: Colophon
-layout: page
+layout: default
 ---
 
 Hi! I'm Olav Bjorkoy - a web designer and programmer from Trondheim, Norway. I'm currently studying computer science at [NTNU][5], specializing in artificial intelligence.

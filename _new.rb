@@ -33,4 +33,4 @@ eos
 
 # Create a new file and open it in textmate
 File.open(path, 'w') { |f| f.write(text) }
-system("mate #{path}")
+system("m #{path}")
