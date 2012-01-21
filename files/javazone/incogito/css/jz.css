@@ -1,7 +1,7 @@
 body {
     font-size:14px;
     font-family: "proxima-nova-condensed",sans-serif;
-    background: #fff url("/incogito/img/body.png");
+    background: #fff url("../img/body.png");
     color:#666;
 }
 
@@ -166,7 +166,7 @@ h2:hover {
 }
 
 #container {
-    background: url("/incogito/img/circle.png") top center no-repeat;
+    background: url(".../img/circle.png") top center no-repeat;
     padding:0 2% 4% 2%;
     margin:0 auto;
     max-width:1000px;
