@@ -23,7 +23,7 @@ body, html {
 
 
 body {
-    background:#333 fixed url("/jz.no/img/body.png");
+    background:#333 fixed url("../img/body.png");
     font-size:20px;
     padding:0;
 }
@@ -92,7 +92,7 @@ h3 {
 }
 
 #around {
-    background:#f1f1f1 url("/jz.no/img/body2.png");
+    background:#f1f1f1 url("../img/body2.png");
     border:1px solid #fff;
     padding:0 0.5em;
 }
