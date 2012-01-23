@@ -1,0 +1,250 @@
+body, html {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+
+#bg {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+}
+
+.high #bg {
+    width:auto;
+    height:100%;
+}
+
+.wide #bg {
+    width:100%;
+    height:auto;
+}
+
+
+body {
+    background:#333 fixed url("/jz.no/img/body.png");
+    font-size:20px;
+    padding:0;
+}
+
+h2,h3 {
+    font-weight:normal;
+    font-size:1.4em;
+    font-family: "proxima-nova-condensed",sans-serif;
+    text-align:center;
+    border-bottom:1px dotted #ddd;
+    padding:0 0 0.5em 0;
+    margin:0 0 1em 0;
+    text-transform:uppercase;
+    line-height:1.2;
+}
+
+h3 {
+    padding-top:2em;
+}
+
+#main img {
+    width:100%;
+    padding:1em;
+    border:1px dotted #ccc;
+    margin-left:-1em;
+    background:#fff;
+}
+
+#main a.submitLink {
+    text-align:center;
+    display:block;
+    border-top:1px dotted #ddd;
+    border-bottom:1px dotted #ddd;
+    padding:0.5em 0;
+    margin:0.5em 0;
+}
+
+#main ul {
+    padding:1.5em 3em;
+    border:1px dotted #ccc;
+    text-align:left;
+    background:#fff;
+    font-size:0.9em;
+}
+
+#main p {
+    font-size:0.9em;
+}
+
+#main blockquote {
+    color:#555;
+    font-style:italic;
+    font-size:0.9em;
+}
+
+#outer {
+    position:relative;
+    z-index:1;
+    padding:3em;
+    max-width:34em;
+    min-width:22em;
+}
+
+#container {
+    border:0.3em solid rgba(0,0,0,0.2);
+}
+
+#around {
+    background:#f1f1f1 url("/jz.no/img/body2.png");
+    border:1px solid #fff;
+    padding:0 0.5em;
+}
+
+#wrap {
+    border-left:3px double #d9daec;
+    border-right:3px double #d9daec;
+    padding:10%;
+}
+
+@keyframes swingy {
+    0% { opacity:1; }
+    25% { opacity:0.8; }
+    50% { opacity:1; }
+    75% { opacity:0.9; }
+    100% { opacity:0.85; }
+}
+
+@-moz-keyframes swingy {
+    0% { opacity:1; }
+    25% { opacity:0.8; }
+    50% { opacity:1; }
+    75% { opacity:0.9; }
+    100% { opacity:0.85; }
+}
+
+@-webkit-keyframes swingy {
+    0% { opacity:1; }
+    25% { opacity:0.8; }
+    50% { opacity:1; }
+    75% { opacity:0.9; }
+    100% { opacity:0.85; }
+}
+
+#logo {
+    margin:0 0 3em 0;
+    text-align:center;
+}
+
+#logo div {
+    margin: 0 auto;
+}
+
+#logo img {
+}
+
+#logo .flame {
+    height:350px;
+}
+#logo .flame img {
+    width:150px;
+    animation: swingy 2s linear infinite alternate;
+    -moz-animation: swingy 2s linear infinite alternate;
+    -webkit-animation: swingy 2s linear infinite alternate;
+}
+#logo .jz {
+    width:300px;
+    height:80px;
+}
+#logo .jz img {
+    width:100%;
+}
+#logo .text {
+
+}
+#logo .text img {
+    width:100%;
+}
+
+#menu ul {
+    margin:0 0 3em 0;
+    padding:0;
+    list-style-type:none;
+    text-align:center;
+    padding:1em;
+    border-top:1px dotted #ccc;
+    border-bottom:1px dotted #ccc;
+}
+
+#menu li {
+    display:inline;
+}
+
+#container a, #menu a {
+    color:#00719d;
+    color:#c01274;
+    text-decoration:none;
+}
+
+#menu a {
+    display:inline;
+    text-transform:uppercase;
+    font-size:22px;
+    font-family: "proxima-nova-condensed",sans-serif;
+    -moz-transition: all 0.5s; 
+    -webkit-transition: all 0.5s;  
+    -ms-transition: all 0.5s;  
+    -o-transition: all 0.5s;  
+    transition: all 0.5s;  
+}
+
+#menu .middle a {
+    margin:0 5%;
+    white-space:nowrap;
+}
+
+#menu a:hover {
+    color:#000;
+}
+
+#main {
+    text-align:justify;
+    line-height:1.5;
+    font-family: "ff-meta-web-pro";
+}
+
+.clear {
+    clear:both;
+}
+
+#partners {
+    padding-left:2px;
+    text-align:center;
+    margin:0 auto;
+}
+
+#partners img {
+    width:157px;
+    padding:0;
+    border:none;
+    margin:0 2px 2px 0;
+    opacity:0.2;
+    -moz-transition: all 0.5s; 
+    -webkit-transition: all 0.5s;  
+    -ms-transition: all 0.5s;  
+    -o-transition: all 0.5s;  
+    transition: all 0.5s;  
+}
+
+#partners img:hover {
+    opacity:1;
+}
+
+@media screen and (min-width: 650px) {
+    #menu li { display:inline; }
+    #outer { position:relative; }
+    #container { border:0.3em solid rgba(0,0,0,0.2); }
+}
+
+@media screen and (max-width: 650px) {
+    #bg { display:none; }
+    #outer { position:static; padding:0; }
+    #menu li { display:block; }
+    #container { border:none; }
+}
