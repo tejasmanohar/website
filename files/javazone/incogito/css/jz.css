@@ -166,7 +166,11 @@ h2:hover {
 }
 
 #container {
+<<<<<<< HEAD
+    background: url(".../img/circle.png") top center no-repeat;
+=======
     background: url("../img/circle.png") top center no-repeat;
+>>>>>>> 5ea0c0b4734a8ad2bdd6bb95c75d8291db8d429b
     padding:0 2% 4% 2%;
     margin:0 auto;
     max-width:1000px;
