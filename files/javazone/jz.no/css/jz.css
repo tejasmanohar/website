@@ -83,6 +83,7 @@ h3 {
     position:relative;
     z-index:1;
     padding:3em;
+    margin:0 auto;
     max-width:34em;
     min-width:22em;
 }
