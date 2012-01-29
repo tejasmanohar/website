@@ -1,5 +1,7 @@
 $(function() {
 
+    $("body").prepend('<img src="img/tilt.jpg" id="bg" />');
+
     var setratio = function() {
         var h = $(window).height();
         var w = $(window).width();
@@ -44,7 +46,7 @@ $(function() {
     ];
 
     shuffle = function(o) {
-        for(var j, x, i = o.length; i; j = parseInt(Math.random() * i, 10), x = o[--i], o[i] = o[j], o[j] = x)
+        for(var j, x, i = o.length; i; j = parseInt(Math.random() * i, 10), x = o[--i], o[i] = o[j], o[j] = x);
         return o;
     };
 

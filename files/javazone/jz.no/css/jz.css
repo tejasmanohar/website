@@ -23,7 +23,7 @@ body, html {
 
 
 body {
-    background:#f1f1f1 fixed url("../img/body.png");
+    background:#444 fixed url("../img/body.png");
     font-size:20px;
     padding:0;
 }
@@ -31,7 +31,7 @@ body {
 h2,h3 {
     font-weight:normal;
     font-size:1.4em;
-    font-family: "proxima-nova-condensed",sans-serif;
+    font-family: "proxima-nova-condensed",helvetica,arial,sans-serif;
     text-align:center;
     border-bottom:1px dotted #ddd;
     padding:0 0 0.5em 0;
@@ -195,7 +195,7 @@ h3 {
     display:inline;
     text-transform:uppercase;
     font-size:22px;
-    font-family: "proxima-nova-condensed",sans-serif;
+    font-family: "proxima-nova-condensed",helvetica,arial,sans-serif;
     -moz-transition: all 0.5s; 
     -webkit-transition: all 0.5s;  
     -ms-transition: all 0.5s;  
@@ -215,7 +215,7 @@ h3 {
 #main {
     text-align:justify;
     line-height:1.5;
-    font-family: "ff-meta-web-pro";
+    font-family: "ff-meta-web-pro", helvetica, arial, sans-serif;
 }
 
 .clear {
