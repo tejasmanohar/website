@@ -23,7 +23,7 @@ body, html {
 
 
 body {
-    background:#333 fixed url("../img/body.png");
+    background:#f1f1f1 fixed url("../img/body.png");
     font-size:20px;
     padding:0;
 }
@@ -85,6 +85,7 @@ h3 {
     padding:3em;
     max-width:34em;
     min-width:22em;
+    margin: 0 auto;
 }
 
 #container {
@@ -105,26 +106,26 @@ h3 {
 
 @keyframes swingy {
     0% { opacity:1; }
-    25% { opacity:0.8; }
+    25% { opacity:0.7; }
     50% { opacity:1; }
-    75% { opacity:0.85; }
+    75% { opacity:0.80; }
     100% { opacity:0.9; }
 }
 
 @-moz-keyframes swingy {
     0% { opacity:1; }
-    25% { opacity:0.8; }
+    25% { opacity:0.7; }
     50% { opacity:1; }
-    75% { opacity:0.9; }
-    100% { opacity:0.85; }
+    75% { opacity:0.80; }
+    100% { opacity:0.9; }
 }
 
 @-webkit-keyframes swingy {
     0% { opacity:1; }
-    25% { opacity:0.8; }
+    25% { opacity:0.7; }
     50% { opacity:1; }
-    75% { opacity:0.9; }
-    100% { opacity:0.85; }
+    75% { opacity:0.80; }
+    100% { opacity:0.9; }
 }
 
 #logo {
@@ -140,19 +141,21 @@ h3 {
 }
 
 #logo .flame {
-    height:350px;
+    with:200px;
+    margin-bottom:60px;
 }
 #logo .flame img {
-    width:150px;
+    width:120px;
     animation: swingy 2s linear infinite alternate;
     -moz-animation: swingy 2s linear infinite alternate;
     -webkit-animation: swingy 2s linear infinite alternate;
 }
 #logo .jz {
-    width:300px;
-    height:80px;
+    width:350px;
+    height:150px;
 }
 #logo .jz img {
+    max-width:360px;
     width:100%;
 }
 #logo .text {
@@ -160,6 +163,7 @@ h3 {
 }
 #logo .text img {
     width:100%;
+    max-widt:520px;
 }
 
 #menu ul {
@@ -172,6 +176,10 @@ h3 {
     border-bottom:1px dotted #ccc;
 }
 
+.last #menu ul {
+    margin-bottom:1em;
+}
+
 #menu li {
     display:inline;
 }
@@ -179,6 +187,7 @@ h3 {
 #container a, #menu a {
     color:#00719d;
     color:#c01274;
+    color:#0090c6;
     text-decoration:none;
 }
 
@@ -224,7 +233,7 @@ h3 {
     padding:0;
     border:none;
     margin:0 2px 2px 0;
-    opacity:0.2;
+    opacity:0.4;
     -moz-transition: all 0.5s; 
     -webkit-transition: all 0.5s;  
     -ms-transition: all 0.5s;  

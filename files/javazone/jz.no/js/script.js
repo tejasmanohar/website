@@ -12,38 +12,39 @@ $(function() {
 
     
     var partners = [
-        "systek_2012.jpg",
-        "arktekk_2012.jpg",
-        "nets_2012.jpg",
-        "marcello_2012.jpg",
-        "edb_int_2012.jpg",
-        "visma_2012.jpg",
-        "bekk_2012.jpg",
-        "computas_2012.jpg",
-        "jpro_2012.jpg",
-        "nith_2012.jpg",
-        "steria_2012.jpg",
-        "kantega_2012.jpg",
-        "iterate_2012.jpg",
-        "conax_2012.jpg",
-        "microsoft_2012.jpg",
-        "knowit_2012.jpg",
-        "mesan_2012.jpg",
-        "norgesgruppen_2012.jpg",
-        "bouvet_2012.jpg",
-        "kodemaker_2012.jpg",
-        "accenture_2012.jpg",
-        "capgemini_2012.jpg",
-        "cisco_2012.jpg",
-        "ciber_2012.jpg",
-        "programutvikling_2012.jpg",
-        "itera_2012.jpg",
-        "wepstep_2012.jpg",
-        "miles_2012.jpg"
+        ["systek_2012.jpg", "http://www.systek.no/"],
+        ["arktekk_2012.jpg", "http://www.arktekk.no/"],
+        ["nets_2012.jpg", "http://www.nets.no/"],
+        ["marcello_2012.jpg", "http://www.marcello.no/"],
+        ["edb_int_2012.jpg", "http://www.edb.com/"],
+        ["visma_2012.jpg", "http://www.visma.no/"],
+        ["bekk_2012.jpg", "http://www.bekk.no/"],
+        ["computas_2012.jpg", "http://www.computas.no/"],
+        ["jpro_2012.jpg", "http://www.jpro.no/"],
+        ["nith_2012.jpg", "http://nith.no/"],
+        ["steria_2012.jpg", "http://www.steria.no/"],
+        ["kantega_2012.jpg", "http://www.kantega.no/"],
+        ["iterate_2012.jpg", "http://www.iterate.no/"],
+        ["conax_2012.jpg", "http://www.conax.no/"],
+        ["microsoft_2012.jpg", "http://www.microsoft.no/"],
+        ["knowit_2012.jpg", "http://www.knowit.no/"],
+        ["mesan_2012.jpg", "http://www.mesan.no/"],
+        ["norgesgruppen_2012.jpg", "http://www.norgesgruppen.no/"],
+        ["bouvet_2012.jpg", "http://www.bouvet.no/"],
+        ["kodemaker_2012.jpg", "http://www.kodemaker.no/"],
+        ["accenture_2012.jpg", "http://www.accenture.no/"],
+        ["capgemini_2012.jpg", "http://www.capgemini.no/"],
+        ["cisco_2012.jpg", "http://www.cisco.com/"],
+        ["ciber_2012.jpg", "http://www.ciber.no/"],
+        ["programutvikling_2012.jpg", "http://www.put.no/"],
+        ["itera_2012.jpg", "http://www.iteraconsulting.no/"],
+        ["wepstep_2012.jpg", "http://www.webstep.no/"],
+        ["miles_2012.jpg", "http://www.miles.no/"],
+        ["finn_2012.jpg", "http://www.finn.no"]
     ];
 
     shuffle = function(o) {
-        for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        for(var j, x, i = o.length; i; j = parseInt(Math.random() * i, 10), x = o[--i], o[i] = o[j], o[j] = x)
         return o;
     };
 
@@ -53,8 +54,10 @@ $(function() {
         for(var i = 0; i < partners.length; i++) {
             $("#partners")
                 .prepend($("<a href='#' />")
+                .attr("href", partners[i][1])
+                .attr("target", "_blank")
                 .html($("<img />").attr("src", 
-                    "img/partners/" + partners[i])));
+                    "img/partners/" + partners[i][0])));
         }
     };
     
