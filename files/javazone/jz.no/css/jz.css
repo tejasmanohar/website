@@ -2,6 +2,7 @@ body, html {
     margin:0;
     padding:0;
     height:100%;
+    background:#444;
 }
 
 #bg {
@@ -83,7 +84,7 @@ h3 {
     position:relative;
     z-index:1;
     padding:3em;
-    max-width:34em;
+    max-width:35em;
     min-width:22em;
     margin: 0 auto;
 }
@@ -142,10 +143,10 @@ h3 {
 
 #logo .flame {
     with:200px;
-    margin-bottom:60px;
+    margin-bottom:40px;
 }
 #logo .flame img {
-    width:120px;
+    width:150px;
     animation: swingy 2s linear infinite alternate;
     -moz-animation: swingy 2s linear infinite alternate;
     -webkit-animation: swingy 2s linear infinite alternate;
@@ -163,7 +164,7 @@ h3 {
 }
 #logo .text img {
     width:100%;
-    max-widt:520px;
+    max-width:520px;
 }
 
 #menu ul {
