@@ -1,4 +1,4 @@
-@media screen and (max-width: 899px){
+@media screen and (max-width: 859px){
 
 .max, .med {
     display:none;
@@ -6,6 +6,7 @@
 
 body {
     min-width:460px;
+    font-size:22px;
 }
 
 #minsplash {
@@ -47,9 +48,9 @@ body {
 #menu {
 	position:absolute;
 	top:400px;
-	width:420px;
+	width:520px;
 	left:50%;
-	margin-left:-200px;
+	margin-left:-251px;
 }
 
 #menu .middle {
@@ -58,6 +59,14 @@ body {
 
 #menu div {
 	margin-bottom:30px;
+	width:115px;
+	height:105px;
+}
+
+#menu div a {
+	padding-top:60px;
+	font-size:18px;
+	font-weight:bold;
 }
 
 #main {

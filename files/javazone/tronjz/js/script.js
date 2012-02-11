@@ -69,7 +69,6 @@ $(function() {
             next = - parseInt($(this).scrollTop()) * 0.5;
             part = next * 0.5;
             $("#splash").css("background-position-y", "" + next + "px");
-            $("#minsplash").css("background-position-y", "" + next + "px");
             $("#top").css("background-position-y", "" + next + "px");
 
 
