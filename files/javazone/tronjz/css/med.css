@@ -1,0 +1,62 @@
+@media screen and (min-width: 900px) and (max-width:1349px) {
+
+/* ----------------------------------------------------- */
+
+.min, .max {
+    display:none;
+}
+
+#c4 {
+    padding:0 20px 100px 20px;
+}
+
+#menu {
+    width:820px;
+    position:absolute;
+    top:400px;
+    left:50%;
+    margin-left:-410px;
+}
+
+#menu div.last {
+    float:right;
+    margin-right:0;
+}
+
+#main {
+    margin:0 auto;
+    width:820px;
+}
+
+#main .side2 {
+    clear:both;
+    width:100%;
+}
+
+/* ----------------------------------------------------- */
+
+#splash {
+    display:block;
+    position:relative;
+    width:100%;
+    height:600px;
+    min-width:900px;
+    margin:-40px auto -30px auto;
+    background:url("../img/splash.png") 50% 0 no-repeat; 
+    animation: swingy 2s linear infinite alternate;
+    -moz-animation: swingy 2s linear infinite alternate;
+    -webkit-animation: swingy 2s linear infinite alternate; 
+    z-index:0;
+}
+
+#top {
+    position:absolute;
+    width:100%;
+    height:590px;
+    min-width:900px;
+    margin:0 auto 0 auto;
+    background:url("../img/top.png") bottom left repeat-x; 
+    
+}
+
+}
