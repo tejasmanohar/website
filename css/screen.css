@@ -3,12 +3,12 @@
   padding:0; }
 
 body {
-  padding:10%;
   line-height:1.5;
   font-size:0.9em;
   font-family: ff-tisa-web-pro-1,ff-tisa-web-pro-2,serif; }
 
 #wrap {
+  padding:7%;
   max-width:650px;
   margin:0; }
 
@@ -98,3 +98,8 @@ pre,blockquote {
   font-size:1.4em; }
 .post ul, .post ol {
   padding:0 0 1em 2em; }
+
+
+@media all and (max-width:1200px) {
+  h2 span { display:none; }
+}
