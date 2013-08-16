@@ -1,68 +1,87 @@
-<h2><span>❡</span>Olav Bjørkøy</h2>
+<div class="intro donthyphenate">
+
+<h2>Olav Bjørkøy</h2>
 
 <ul>
-  <li>Studied Computer Science at <a href="http://www.ntnu.no">NTNU</a></li>
-  <li>Consultant at <a href="http://www.bekk.no">BEKK</a></li>
-  <li>Occasionally on <a href="http://twitter.com/vandelay">Twitter</a></li>
-  <li>More often on <a href="http://github.com/olav">GitHub</a></li>
-  <li>Reachable by <a href="mailto:olav at bjorkoy dot com">email</a></li>
+  <li>Hi, I'm Olav!</li>
+  <li>I studied CS at <a href="http://www.ntnu.no">NTNU</a>.</li>
+  <li>I'm a consultant at <a href="http://www.bekk.no">BEKK</a>.</li>
+  <li>I'm occasionally on <a href="http://twitter.com/vandelay">Twitter</a>.</li>
+  <li>I'm more often on <a href="http://github.com/olav">GitHub</a>.</li>
+  <li>I'm reachable by <a href="mailto:olav at bjorkoy dot com">email</a>.</li>
 </ul>
 
-<h2><span>❡</span>Papers</h2>
+<h2>Projects</h2>
 
-<ul>
+<ul class="items projects">
   <li>
-    <a href="https://github.com/olav/thesis/blob/master/thesis/dist/thesis.pdf?raw=true">Adaptive Aggregation of Recommender Systems</a>
-    <span>
-      <a class="more" href="https://github.com/olav/thesis/blob/master/paper/dist/paper.pdf?raw=true">short version</a>,
-      <a class="more" href="https://github.com/olav/thesis">code</a>
-    </span>
+    <strong><a href="https://github.com/olav/pacman">Pacman</a></strong>
+    <span>A fast static site generator, built for large single-page&nbsp;webapps.</span>
+  </li>
+  <li>
+    <strong><a href="https://github.com/olav/tag.js">Tag.js</a></strong>
+    <span>An experiment in writing HTML using plain JavaScript&nbsp;functions.</span>
+  </li>
+  <li>
+    <strong><a href="https://github.com/olav/scene.js">Scene.js</a></strong>
+    <span>A small JavaScript library for rendering view&nbsp;models.</span>
+  </li>
+  <li>
+    <strong><a href="https://github.com/olav/dispatch.js">Dispatch.js</a></strong>
+    <span>A simple library for routing hash change events to&nbsp;handlers.</span>
+  </li>
+  <li>
+    <strong><a href="http://www.blueprintcss.org/">Blueprint CSS</a></strong>
+    <span>Horizontal and vertical grids, and sensible default&nbsp;styling.</span>
+  </li>
+  <li>
+    <strong><a href="https://github.com/olav/RubySOM">RubySOM</a></strong>
+    <span>Using a SOM (Kohonen map) to solve the&nbsp;TSP.</span>
+  </li>
+  <li>
+    <strong><a href="https://github.com/olav/PyANN">PyANN</a></strong>
+    <span>Generic Artificial Neural Network Framework in&nbsp;Python.</span>
+  </li>
+  <li>
+    <strong><a href="https://github.com/olav/RubyGA">RubyGA</a></strong>
+    <span>Genetic Algorithm Framework written in&nbsp;Ruby.</span>
+  </li>
+  <li>
+    <strong><a href="https://github.com/olav/PyPoker">PyPoker</a></strong>
+    <span>A poker bot capable of playing against human&nbsp;opponents.</span>
+  </li>
+  <li>
+    <strong><a href="https://github.com/olav/dotfiles">Dotfiles</a></strong>
+    <span>My dotfiles for Ubuntu, mostly for Xmonad, Vim and&nbsp;ZSH.</span>
+  </li>
+</ul>
+
+<h2>Papers</h2>
+
+<ul class="items">
+  <li>
+    <a href="https://github.com/olav/thesis/blob/master/thesis/dist/thesis.pdf?raw=true">Adaptive Aggregation of Recommender&nbsp;Systems</a>
+    <!-- <a class="more" href="https://github.com/olav/thesis/blob/master/paper/dist/paper.pdf?raw=true">short version</a> -->
+    <!-- <a class="more" href="https://github.com/olav/thesis">code</a> -->
   <li>
     <a href="https://github.com/olav/papers/blob/master/competitive.and.cooperative.behavior.in.bio-inspired.ai.pdf?raw=true">
-      Competitive and Cooperative Behavior in Bio-Inspired AI</a>
+      Competitive and Cooperative Behavior&nbsp;in&nbsp;Bio-Inspired&nbsp;AI</a>
   </li>
   <li>
     <a href="https://github.com/olav/papers/blob/master/user.modeling.on.the.web.pdf?raw=true">
-      User Modeling on the Web: An Exploratory Review of Recommendation Systems</a>
-  </li>    
-</ul>
-  
-<h2><span>❡</span>Projects</h2>
-
-<ul>
-  <li>
-    <a href="http://www.blueprintcss.org/">Blueprint CSS Framework</a>:
-    Horizontal and vertical grids, and sensible default styling.
-  </li>
-  <li>
-    <a href="https://github.com/olav/RubySOM">RubySOM</a>:
-    Using a SOM (self-organizing map / kohonen map) to solve the TSP.
-  </li>
-  <li>
-    <a href="https://github.com/olav/PyANN">PyANN</a>:
-    Generic Artificial Neural Network Framework in Python.
-  </li>
-  <li>
-    <a href="https://github.com/olav/RubyGA">RubyGA</a>:
-    Genetic Algorithm Framework written in Ruby.
-  </li>
-  <li>
-    <a href="https://github.com/olav/PyPoker">PyPoker</a>:
-    A poker bot capable of playing against human opponents.
-  </li>
-  <li>
-    <a href="https://github.com/olav/dotfiles">Dotfiles</a>:
-    My dotfiles for Ubuntu, mostly for Xmonad, Vim and ZSH.
+      User Modeling on the Web: A Review of Recommendation Systems</a>
   </li>
 </ul>
 
-<h2><span>❡</span>Articles</h2>
+<h2>Articles</h2>
 
-<ul class="posts">
-  {% for post in site.posts %}
+<ul class="items posts last">
+  {% for post in site.posts limit:10 %}
     <li>
+      <strong>{{ post.date | date_to_string }}</strong>
       <a href="{{ post.url }}">{{ post.title }}</a>
-      <span>{{ post.date | date_to_string }}</span>
     </li>
   {% endfor %}
 </ul>
+
+</div>

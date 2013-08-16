@@ -1,11 +1,11 @@
 {% include header.html %}
 
 <div class="post">
-  <h2><span>❡</span>{{ page.title }}</h2>
+  <h2 class="donthyphenate">{{ page.title }}</h2>
   <div class="content">
     {{ content }}
   </div>
-  <p class="date">~ {{ page.date | date_to_string }}</p>
+  <p class="date"><span class="top">{{ page.date | date_to_string }}</span></p>
 </div>    
 
 <hr>
