@@ -1,17 +1,11 @@
-<div class="intro donthyphenate">
+<div class="intro">
 
-<h2>Olav Bjørkøy</h2>
-
-<ul>
-  <li>Hi, I'm Olav!</li>
-  <li>I studied CS at <a href="http://www.ntnu.no">NTNU</a>.</li>
-  <li>I'm a consultant at <a href="http://www.bekk.no">BEKK</a>.</li>
+<ul class="colophon">
+  <li>Hi, I'm Olav.</li>
   <li>I'm occasionally on <a href="http://twitter.com/vandelay">Twitter</a>.</li>
   <li>I'm more often on <a href="http://github.com/olav">GitHub</a>.</li>
   <li>I'm reachable by <a href="mailto:olav at bjorkoy dot com">email</a>.</li>
 </ul>
-
-<h2>Projects</h2>
 
 <ul class="items projects">
   <li>
@@ -29,6 +23,10 @@
   <li>
     <strong><a href="https://github.com/olav/dispatch.js">Dispatch.js</a></strong>
     <span>A simple library for routing hash change events to&nbsp;handlers.</span>
+  </li>
+  <li>
+    <strong><a href="http://superherojs.com">Superhero.js</a></strong>
+    <span>A collection of resources on how to build large single page webapps.</span>
   </li>
   <li>
     <strong><a href="http://www.blueprintcss.org/">Blueprint CSS</a></strong>
@@ -56,27 +54,23 @@
   </li>
 </ul>
 
-<h2>Papers</h2>
-
 <ul class="items">
   <li>
-    <a href="https://github.com/olav/thesis/blob/master/thesis/dist/thesis.pdf?raw=true">Adaptive Aggregation of Recommender&nbsp;Systems</a>
-    <!-- <a class="more" href="https://github.com/olav/thesis/blob/master/paper/dist/paper.pdf?raw=true">short version</a> -->
-    <!-- <a class="more" href="https://github.com/olav/thesis">code</a> -->
+    <a href="/files/papers/adaptive.aggregation.of.recommender.systems.pdf">Adaptive Aggregation of Recommender&nbsp;Systems</a>
+    <a class="more" href="/files/papers/adaptive.aggregation.of.recommender.systems.short.pdf">short version</a>
+    <a class="more" href="https://github.com/olav/thesis">code</a>
   <li>
-    <a href="https://github.com/olav/papers/blob/master/competitive.and.cooperative.behavior.in.bio-inspired.ai.pdf?raw=true">
+    <a href="/files/papers/competitive.and.cooperative.behavior.in.bio-inspired.ai.pdf">
       Competitive and Cooperative Behavior&nbsp;in&nbsp;Bio-Inspired&nbsp;AI</a>
   </li>
   <li>
-    <a href="https://github.com/olav/papers/blob/master/user.modeling.on.the.web.pdf?raw=true">
+    <a href="/files/papers/user.modeling.on.the.web.pdf">
       User Modeling on the Web: A Review of Recommendation Systems</a>
   </li>
 </ul>
 
-<h2>Articles</h2>
-
 <ul class="items posts last">
-  {% for post in site.posts limit:10 %}
+  {% for post in site.posts limit:20 %}
     <li>
       <strong>{{ post.date | date_to_string }}</strong>
       <a href="{{ post.url }}">{{ post.title }}</a>

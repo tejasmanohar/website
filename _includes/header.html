@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{% if page.title %}{{ page.title }} (bjorkoy.com){% else %}Olav Bjørkøy (bjorkoy.com){% endif %}</title>
+  <title>{% if page.title %}{{ page.title }}{% else %}Olav Bjørkøy{% endif %}</title>
   <meta name="author" content="Olav Bjorkoy">
-  <meta name="description" content="{% if page.title %}{{page.title}} - {% endif %}">
+  <meta name="description" content="{% if page.title %}{{page.title}}{% else %}Olav Bjørkøy{% endif %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- <link href="/atom.xml" rel="alternate" title="bjorkoy.com" type="application/atom+xml"> -->
   <link href="http://feeds.feedburner.com/bjorkoy" rel="alternate" title="bjorkoy.com" type="application/atom+xml">
   <meta name="google-site-verification" content="7vDyCyvSym2pZLSBnjl1IrtN-hp00gqMfNG8fbHNXyM">
-  <link rel="icon" type="image/png" href="/images/icon.png?223">
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+  <link rel="icon" type="image/png" href="/images/icon.png">
   <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,600' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="//use.typekit.net/zmq0szj.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
   <script src="/js/jquery.js"></script>
   <script src="/js/main.js"></script>
@@ -21,6 +23,4 @@
 
 </head>
 <body id="bjorkoy-com">
-<div class="so"><a href="/"><img src="/images/icons.png"></a></div>
-
 <div class="wrap">
