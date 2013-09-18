@@ -27,7 +27,7 @@ $(function () {
     app.utils.replace($(el)[0],
       /'/g, "\u2019");
     app.utils.replace($(el)[0],
-      / [-]+ /g, " \u2014 ")
+      / [-]+ /g, " \u2014 ");
   });
 
 });

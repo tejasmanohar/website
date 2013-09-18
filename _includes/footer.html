@@ -9,7 +9,7 @@
 
 <ul class="items projects">
   <li>
-    <strong><a href="https://github.com/olav/pacman">Pacman</a></strong>
+    <strong><a href="https://github.com/olav/pacbot">Pacbot</a></strong>
     <span>A fast static site generator, built for large single-page&nbsp;webapps.</span>
   </li>
   <li>
@@ -70,7 +70,7 @@
 </ul>
 
 <ul class="items posts last">
-  {% for post in site.posts limit:20 %}
+  {% for post in site.posts limit:11 %}
     <li>
       <strong>{{ post.date | date_to_string }}</strong>
       <a href="{{ post.url }}">{{ post.title }}</a>

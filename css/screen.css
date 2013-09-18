@@ -18,14 +18,19 @@ pre { font-size: .75em; overflow: auto; white-space: pre; margin: 2em 0; }
 code { font-family: 'Source Code Pro'; font-weight: 400; }
 blockquote { font-style: italic; margin: 1em; }
 
+.wrap { max-width: 75em; }
+
 .post { margin: 0 0 8em 0; }
 .post p, .post ul, .post ol, .post h2, .post h3, .post h4 { max-width: 34em; }
 .post ul, .post ol { margin: 2em 0; }
 .post li { margin: .25em 0; }
-.post img { width: auto; max-width: 100%; border-radius: .2em; margin: 2em 0; }
+
+.post img { width: auto; max-width: 100%; }
+.post .img { margin: 3em 0; }
+
 .post figure { margin: 3em 0; }
 .post object { margin: 0 auto; }
-.img a { display: block; border: none; margin: 3.5em 0 3.5em 0; }
+.img a { display: block; border: none; }
 
 .date { margin: 4em 0 10em 0; }
 .top { border-top: 1px solid #332; margin: 0; }
@@ -49,5 +54,16 @@ blockquote { font-style: italic; margin: 1em; }
 @media (max-width: 30em) {
   html { font-size:16px; }
   .not-min { display: none; }
-  .post img { margin: 1em 0; }
+  .post .img { margin: 1em 0; }
 }
+
+.wrap {
+  -webkit-font-smoothing: antialiased;
+  -webkit-animation: fade 300ms;
+  -moz-animation: fade 300ms;
+  animation: fade 300ms;
+}
+
+@keyframes fade { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fade { from { opacity:0; } to { opacity:1; } }
+@-webkit-keyframes fade { from { opacity:0; } to { opacity:1; } }
