@@ -9,7 +9,7 @@ layout: nil
  <link href="http://tejas.io/"/>
  
  <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>http://bjorkoy.com/</id>
+ <id>http://tejas.io/</id>
  <author>
    <name>Tejas Manohar</name>
    <email>me@tejas.io</email>
