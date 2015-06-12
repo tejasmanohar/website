@@ -4,23 +4,23 @@ layout: nil
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
- <title>bjorkoy.com</title>
- <link href="http://bjorkoy.com/atom.xml" rel="self"/>
- <link href="http://bjorkoy.com/"/>
+ <title>tejas.io</title>
+ <link href="http://tejas.io/atom.xml" rel="self"/>
+ <link href="http://tejas.io/"/>
  
  <updated>{{ site.time | date_to_xmlschema }}</updated>
  <id>http://bjorkoy.com/</id>
  <author>
-   <name>Olav Bjorkoy</name>
-   <email>olav@bjorkoy.com</email>
+   <name>Tejas Manohar</name>
+   <email>me@tejas.io</email>
  </author>
 
  {% for post in site.posts limit:10 %}
  <entry>
    <title>{{ post.title }}</title>
-   <link href="http://bjorkoy.com{{ post.url }}"/>
+   <link href="http://tejas.io{{ post.url }}"/>
    <updated>{{ post.date | date_to_xmlschema }}</updated>
-   <id>http://bjorkoy.com{{ post.id }}</id>
+   <id>http://tejas.io{{ post.id }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
  </entry>
  {% endfor %}
