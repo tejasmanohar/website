@@ -1,0 +1,40 @@
+* {
+  font-family: monospace;
+  font-size: 1em;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: normal;
+}
+h1, h2, ul, p {
+  margin-top: 1em
+}
+ol li {
+  list-style: decimal inside
+}
+h1, h2 {
+  color: #00f
+}
+h1::before {
+  content: "# "
+}
+h2::before {
+  content: "## "
+}
+ul li::before {
+  content: "* "
+}
+body {
+  width: 80ex;
+  margin: 1em auto;
+}
+@media print {
+  body {
+    width: auto;
+    font-size: 10pt
+  }
+  a {
+    text-decoration: none
+  }
+}
