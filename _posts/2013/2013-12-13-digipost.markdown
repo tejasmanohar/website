@@ -1,8 +1,0 @@
----
-title: Digipost Frontend and Design
-layout: post
----
-
-<div class="img">
-    <img src="/portfolio/digipost/digipost.png">
-</div>
