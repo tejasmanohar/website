@@ -8,6 +8,7 @@ build: install
 	bundle exec jekyll build --incremental
 
 deploy: build
+	git push
 	cd _site \
 		&& git init \
 		&& git add . \
