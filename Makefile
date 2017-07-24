@@ -8,7 +8,8 @@ build: install
 	bundle exec jekyll build
 
 deploy: build
-	cd _site &&
-		\ git add -A . &&
-		\ git commit -m "deploy" &&
-		\ git push origin gh-pages
+	cd _site \
+		&& git init \
+		&& git add . \
+		&& git commit -m "deploy" \
+		&& git push -f git@github.com:tejasmanohar/website.git master:gh-pages
