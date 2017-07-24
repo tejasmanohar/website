@@ -1,0 +1,8 @@
+{% for post in site.posts %}
+  <section>
+    <h3 class="post-title">
+        <a href="{% if post.external_url %}{{post.external_url}}{% else %}{{post.url}}{% endif %}">{{post.title}}</a>
+        <span class="separator"> &middot; </span>
+          {{ post.date | date: "%b %-d, %Y" }}
+  </section>
+{% endfor %}

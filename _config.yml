@@ -1,0 +1,6 @@
+title: Tejas Manohar
+email: me@tejas.io
+
+include: ['_pages']
+kramdown:
+  input: GFM
