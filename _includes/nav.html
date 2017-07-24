@@ -1,0 +1,8 @@
+{% for node in site.pages %}
+  {% if node.external_url %}
+    {% assign url = node.external_url %}
+  {% else %}
+    {% assign url = node.url %}
+  {% endif %}
+  <h6><a href="{{url}}" {% if page.url == url %}class="active"{% endif %}>{{node.title}}</a></h6>
+{% endfor %}
