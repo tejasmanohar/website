@@ -5,7 +5,7 @@ serve: install
 	bundle exec jekyll
 
 build: install
-	bundle exec jekyll build
+	bundle exec jekyll build --incremental
 
 deploy: build
 	cd _site \
