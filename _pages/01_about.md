@@ -10,8 +10,8 @@ maximizing **impact** by building great infrastructure and growing others.
 I'm currently happily employed at [Segment](https://segment.com/), where I work on the
 infrastructure behind [Sources](https://segment.com/sources) and
 [Warehouses](https://segment.com/warehouses). If you're looking to join a
-breakout startup tackling a Salesforce-sized market with hard engineering
-problems, contact me at _my first name [at] company website_.
+breakout startup tackling a Salesforce-sized market with interesting engineering
+challenges, contact me at _my first name [at] company website_.
 
 Previously, I was the first (and later, lead) engineer at [AutoLotto](http://autolotto.com/)
 under two non-technical co-founders. I took the product from inception to growth,
