@@ -4,7 +4,7 @@ title: Press
 permalink: /press
 ---
 
-Sometimes, I end up in the news, and then I post a link here. If you're interested in
+Sometimes, I end up in the news, and then, I post a link here. If you're interested in
 featuring my work, words, or thoughts, don't hesitate to reach out.
 
 - [5 innovative IT hiring Strategies](http://www.cio.com/article/3206005/hiring-and-staffing/5-innovative-it-hiring-strategies.html), _CIO magazine_
