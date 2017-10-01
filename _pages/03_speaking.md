@@ -10,11 +10,11 @@ from meetups to workshops to summer camps in the past.
 
 # Upcoming
 
-- Write once, Use anywhere with GRPC, _[ForwardJS]_
-- Concurrency Deep-Dive, _[PostgresOpen]_
-- Reducing boilerplate with Code Generation, _[GoSF]_
+- [Reducing boilerplate with Code Generation](https://www.meetup.com/golangsf/events/242803848/), _[GoSF]_
 
 # Past
+- [Concurrency Deep-Dive](https://www.youtube.com/watch?v=ZxhBkBNxvR0), _[PostgresOpen]_
+- Write once, Use anywhere with GRPC, _[ForwardJS]_
 - [Getting started with GRPC and Node.js](https://www.youtube.com/watch?v=U7GTHv0bn3w), _[SFNode]_
 - [Koa + ES6](https://www.meetup.com/nashjs/events/224842082/), _[NashJS]_
 - The Climb, _Girls Who Code at FB, AMZN, WDAY_
