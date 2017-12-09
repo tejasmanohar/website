@@ -8,11 +8,8 @@ I love public speaking. If you think an opportunity may be fit, let me know.
 It doesn't have to be a conference-- I've done everything
 from meetups to workshops to summer camps in the past.
 
-# Upcoming
-
-- [Reducing boilerplate with Code Generation](https://www.meetup.com/golangsf/events/242803848/), _[GoSF]_
-
 # Past
+- [Reducing boilerplate with Code Generation](https://www.meetup.com/golangsf/events/242803848/), _[GoSF]_
 - [Concurrency Deep-Dive](https://www.youtube.com/watch?v=ZxhBkBNxvR0), _[PostgresOpen]_
 - Write once, Use anywhere with GRPC, _[ForwardJS]_
 - [Getting started with GRPC and Node.js](https://www.youtube.com/watch?v=U7GTHv0bn3w), _[SFNode]_
