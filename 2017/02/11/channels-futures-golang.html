@@ -1,0 +1,226 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>
+      
+        Using Channels as Futures in Golang
+      
+    </title>
+    <meta name="description" content="Tejas Manohar is a software engineer that enjoys crafting elegant solutions to real problems." />
+    <meta property="og:image" content="https://tejas.io/public/images/segment-green-profile-og.jpg">
+
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,300,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/prism.css">
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<header id="header">
+	<a id="logo" href="/">
+		<img src="/public/images/segment-green-profile.jpg" />
+	</a>
+
+	<h1><a href="/">Tejas Manohar</a></h1>
+	<div id="follow-icons">
+	<a href="https://twitter.com/tejasmanohar"><i class="fa fa-twitter-square fa-2x"></i></a>
+  <a href="https://github.com/tejasmanohar"><i class="fa fa-github-square fa-2x"></i></a>
+	<a href="https://linkedin.com/in/tejasmanohar"><i class="fa fa-linkedin-square fa-2x"></i></a>
+</div>
+
+	
+  
+  <h6><a href="/about" >About</a></h6>
+
+  
+  <h6><a href="/" >Writing</a></h6>
+
+  
+  <h6><a href="/speaking" >Speaking</a></h6>
+
+  
+  <h6><a href="/press" >Press</a></h6>
+
+  
+  <h6><a href="/contact" >Contact</a></h6>
+
+  
+  <h6><a href="/" ></a></h6>
+
+
+</header>
+
+<main id="content">
+	<h2>Using Channels as Futures in Golang</h2>
+<time>Feb 11, 2017</time>
+
+<p>Recently, I built a task scheduler on top of <a href="https://aws.amazon.com/ecs/">AWS ECS</a> in
+Go. The application schedules batch jobs with custom arguments as single container tasks
+via AWS ECS, an orchestrator built on top of EC2 and Docker. One of the key requirements
+of the scheduler is monitoring the status of actively running tasks. For this, I chose to
+use AWS ECS’s DescribeTasks endpoint, which takes ECS task ID(s) and returns metadata
+(e.g. duration, status, etc.).</p>
+
+<p>Due to AWS API rate limits, I had to batch API calls. Initially, I thought my code
+would look something like the following.</p>
+
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">Monitor</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">tasks</span><span class="x"> </span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="n">status</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">m</span><span class="x"> </span><span class="o">*</span><span class="n">Monitor</span><span class="p">)</span><span class="x"> </span><span class="n">tick</span><span class="p">()</span><span class="x"> </span><span class="kt">error</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="k">var</span><span class="x"> </span><span class="n">taskIDs</span><span class="x"> </span><span class="p">[]</span><span class="kt">string</span><span class="x">
+  </span><span class="k">for</span><span class="x"> </span><span class="n">taskID</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">m</span><span class="o">.</span><span class="n">tasks</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">taskIDs</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="nb">append</span><span class="p">(</span><span class="n">taskIDs</span><span class="p">,</span><span class="x"> </span><span class="n">taskID</span><span class="p">)</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+
+  </span><span class="n">resp</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">aws</span><span class="o">.</span><span class="n">DescribeTasks</span><span class="p">(</span><span class="n">taskIDs</span><span class="p">)</span><span class="x">
+  </span><span class="k">for</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">task</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">resp</span><span class="o">.</span><span class="n">Tasks</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">if</span><span class="x"> </span><span class="n">task</span><span class="o">.</span><span class="n">Done</span><span class="x"> </span><span class="p">{</span><span class="x">
+      </span><span class="n">m</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">ID</span><span class="p">]</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">getStatus</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">Containers</span><span class="p">[</span><span class="m">0</span><span class="p">])</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">m</span><span class="x"> </span><span class="o">*</span><span class="n">Monitor</span><span class="p">)</span><span class="x"> </span><span class="n">GetStatus</span><span class="p">()</span><span class="x"> </span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="n">status</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="k">return</span><span class="x"> </span><span class="n">m</span><span class="o">.</span><span class="n">status</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">m</span><span class="x"> </span><span class="o">*</span><span class="n">Monitor</span><span class="p">)</span><span class="x"> </span><span class="n">Watch</span><span class="p">(</span><span class="n">task</span><span class="x"> </span><span class="o">*</span><span class="n">ecs</span><span class="o">.</span><span class="n">Task</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">m</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">ID</span><span class="p">]</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">pending</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>Seems reasonable, right? The scheduler just has to create a monitor,
+submit tasks via <code class="highlighter-rouge">Watch</code>, and poll <code class="highlighter-rouge">GetStatus</code> until the target task is complete.</p>
+
+<p>While this works, it’s a leaky abstraction. First, the scheduler must know the monitor
+is batched since it returns a map of all tasks and their statuses. Let’s hide that.
+Take #2–</p>
+
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">m</span><span class="x"> </span><span class="o">*</span><span class="n">Monitor</span><span class="p">)</span><span class="x"> </span><span class="n">GetStatus</span><span class="p">(</span><span class="n">task</span><span class="x"> </span><span class="o">*</span><span class="n">ecs</span><span class="o">.</span><span class="n">Task</span><span class="p">)</span><span class="x"> </span><span class="n">status</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="k">return</span><span class="x"> </span><span class="n">m</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">ID</span><span class="p">]</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>Great! Now, <code class="highlighter-rouge">GetStatus</code> returns a status given a task. Though just a few extra
+characters, this is a huge usability improvement since the scheduler no longer needs
+to batch tasks. However, there’s still a problem with this code. When should scheduler
+call GetStatus?</p>
+
+<p>The naive answer is a simple <code class="highlighter-rouge">for</code> loop.</p>
+
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">status</span><span class="x"> </span><span class="n">schedulerStatus</span><span class="x">
+</span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">status</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">monitor</span><span class="o">.</span><span class="n">GetStatus</span><span class="p">(</span><span class="n">task</span><span class="p">)</span><span class="x">
+  </span><span class="k">if</span><span class="x"> </span><span class="n">status</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="o">...</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">break</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>While this also <em>works</em>, it’s far from perfect. First, we’re <a href="https://en.wikipedia.org/wiki/Busy_waiting">busy waiting</a>
+(aka “spinning”) and thus, consuming 100% of CPU cycles. Go can utilize multiple CPUs,
+but we can certainly do better with just one!</p>
+
+<p>If you came to Go from JavaScript, Scala, C#, or another language with Promises/Futures,
+you’re probably thinking, “How do those translate to Go?”. Well, Go doesn’t have a
+built-in “future” abstraction, but it doesn’t need them because you can easily roll
+your own with channels.</p>
+
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">Monitor</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">tasks</span><span class="x"> </span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="k">chan</span><span class="x"> </span><span class="n">status</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">m</span><span class="x"> </span><span class="o">*</span><span class="n">Monitor</span><span class="p">)</span><span class="x"> </span><span class="n">tick</span><span class="p">()</span><span class="x"> </span><span class="kt">error</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="k">var</span><span class="x"> </span><span class="n">taskIDs</span><span class="x"> </span><span class="p">[]</span><span class="kt">string</span><span class="x">
+  </span><span class="k">for</span><span class="x"> </span><span class="n">taskID</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">m</span><span class="o">.</span><span class="n">tasks</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">taskIDs</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="nb">append</span><span class="p">(</span><span class="n">taskIDs</span><span class="p">,</span><span class="x"> </span><span class="n">taskID</span><span class="p">)</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+
+  </span><span class="n">resp</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">aws</span><span class="o">.</span><span class="n">DescribeTasks</span><span class="p">(</span><span class="n">taskIDs</span><span class="p">)</span><span class="x">
+  </span><span class="k">for</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">task</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">resp</span><span class="o">.</span><span class="n">Tasks</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">if</span><span class="x"> </span><span class="n">task</span><span class="o">.</span><span class="n">Done</span><span class="x"> </span><span class="p">{</span><span class="x">
+      </span><span class="n">m</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">ID</span><span class="p">]</span><span class="x"> </span><span class="o">&lt;-</span><span class="x"> </span><span class="n">getStatus</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">Containers</span><span class="p">[</span><span class="m">0</span><span class="p">])</span><span class="x">
+      </span><span class="nb">delete</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">tasks</span><span class="p">,</span><span class="x"> </span><span class="n">task</span><span class="o">.</span><span class="n">ID</span><span class="p">)</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">m</span><span class="x"> </span><span class="o">*</span><span class="n">Monitor</span><span class="p">)</span><span class="x"> </span><span class="n">Watch</span><span class="p">(</span><span class="n">task</span><span class="x"> </span><span class="o">*</span><span class="n">ecs</span><span class="o">.</span><span class="n">Task</span><span class="p">)</span><span class="x"> </span><span class="k">chan</span><span class="x"> </span><span class="n">status</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">c</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">chan</span><span class="x"> </span><span class="n">status</span><span class="p">,</span><span class="x"> </span><span class="m">1</span><span class="p">)</span><span class="x">
+  </span><span class="n">m</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">ID</span><span class="p">]</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">c</span><span class="x">
+  </span><span class="k">return</span><span class="x"> </span><span class="n">c</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="c">// scheduler</span><span class="x">
+</span><span class="n">m</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">monitor</span><span class="o">.</span><span class="n">New</span><span class="p">()</span><span class="x">
+</span><span class="n">status</span><span class="x"> </span><span class="o">&lt;-</span><span class="x"> </span><span class="n">m</span><span class="o">.</span><span class="n">Watch</span><span class="p">(</span><span class="n">ecsTask</span><span class="p">)</span><span class="x">
+</span></code></pre>
+</div>
+
+<p><em>Boom!</em> This is beautiful, efficient, and way simpler.
+<code class="highlighter-rouge">monitor.Watch(task)</code> returns a channel, which is “await”-able.</p>
+
+<p>Using channels as futures in Go isn’t perfect. First, it’s not possible to make a
+library around them with helper functions as seen in <a href="http://bluebirdjs.com/docs/getting-started.html">Bluebird.js</a>, for example,
+due to Go’s lack of generics. Also, creating a channel for every function call is likely
+not efficient, as each channel has its own mutex, buffer, etc., so this isn’t the right
+decision if you’re dealing with lots of calls in a performance-intensive application.
+In those cases, you should use a single channel and reader, e.g.</p>
+
+<div class="language-go highlighter-rouge"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">m</span><span class="x"> </span><span class="o">*</span><span class="n">Monitor</span><span class="p">)</span><span class="x"> </span><span class="n">GetStatus</span><span class="p">(</span><span class="k">chan</span><span class="x"> </span><span class="n">status</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="k">return</span><span class="x"> </span><span class="n">m</span><span class="o">.</span><span class="n">status</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">for</span><span class="x"> </span><span class="n">task</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">monitor</span><span class="o">.</span><span class="n">GetStatus</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="c">// ... handle the completed tasks</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>… but that comes with more indirection so try out channels as futures when possible
+(most use cases) for a readable, straight-forward API!</p>
+
+
+
+<hr>
+
+<a href="/">
+<h6>
+  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  Back to the list of posts
+</h6>
+</a>
+
+</main>
+
+<!-- <footer id="footer" style="position: absolute; bottom: 0; left: 0; right: 0; text-align: center;"> -->
+<footer id="footer">
+  <section id="footer-message">&copy;  Tejas Manohar. All rights reserved.</section>
+</footer>
+
+<script src="/public/js/prism.js"></script>
+<script src="//cdn.jsdelivr.net/cash/1.3.0/cash.min.js"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+  analytics.load("D3cc98obMFxPB9Kf96kAz6HuFnPe15Bf");
+  analytics.page();
+  }}();
+</script>
+

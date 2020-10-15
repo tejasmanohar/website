@@ -1,0 +1,172 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>
+      
+        Pitfalls of Node.js
+      
+    </title>
+    <meta name="description" content="Tejas Manohar is a software engineer that enjoys crafting elegant solutions to real problems." />
+    <meta property="og:image" content="https://tejas.io/public/images/segment-green-profile-og.jpg">
+
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,300,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/prism.css">
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<header id="header">
+	<a id="logo" href="/">
+		<img src="/public/images/segment-green-profile.jpg" />
+	</a>
+
+	<h1><a href="/">Tejas Manohar</a></h1>
+	<div id="follow-icons">
+	<a href="https://twitter.com/tejasmanohar"><i class="fa fa-twitter-square fa-2x"></i></a>
+  <a href="https://github.com/tejasmanohar"><i class="fa fa-github-square fa-2x"></i></a>
+	<a href="https://linkedin.com/in/tejasmanohar"><i class="fa fa-linkedin-square fa-2x"></i></a>
+</div>
+
+	
+  
+  <h6><a href="/about" >About</a></h6>
+
+  
+  <h6><a href="/" >Writing</a></h6>
+
+  
+  <h6><a href="/speaking" >Speaking</a></h6>
+
+  
+  <h6><a href="/press" >Press</a></h6>
+
+  
+  <h6><a href="/contact" >Contact</a></h6>
+
+  
+  <h6><a href="/" ></a></h6>
+
+
+</header>
+
+<main id="content">
+	<h2>Pitfalls of Node.js</h2>
+<time>Aug 18, 2016</time>
+
+<p>Lately, I’ve been writing lots of Python and Go, but if you know anything about me,
+you’d know I was once a <a href="https://www.meetup.com/nashjs/events/224842082/">major</a> <a href="https://medium.com/@tejasmanohar/i-m-on-the-koa-js-team-14a72717504d">Node.js</a> <a href="https://hackernoon.com/understanding-es6-const-ab448906c4e1">advocate</a>. Recently, when
+I’ve had to stretch my fingers to write a quick “life hack” or number crunching script to
+speed up my day, I haven’t been thinking of JS, so I definitely can’t call it my go-to
+language anymore. That said, since I once did, I believe I have the right to criticize it
+… so, let’s get started.</p>
+
+<h3 id="standard-library">Standard Library</h3>
+
+<p>Node’s standard library is as minimal as can be. While this is a great way to encourage
+the community to build libraries, it also makes it harder to standardize and furthermore,
+compose anything.</p>
+
+<p>But, don’t get me wrong- after working in Ruby and Python, I’m strongly against vast,
+deep standard libraries. Instead, I prefer standard libraries like that of Go and Java
+that are vast yet shallow. The difference is these standard libraries provide all the
+tools you need to solve the most common case and bindings needed to expand beyond,
+whereas Node’s standard library only provides all the (mostly native) bindings needed
+to build the tools to solve the most common case. Instead of <a href="https://github.com/visionmedia/superagent">yet</a> <a href="https://github.com/github/fetch">another</a> <a href="https://github.com/request/request">HTTP</a> <a href="https://github.com/mzabriskie/axios">client</a>, we develop <a href="https://github.com/f2prateek/train">ways</a> <a href="https://github.com/tylerb/graceful">to</a> <a href="https://github.com/gorilla/mux">enhance</a>
+the standard implementation in a way that’s reusable practically everywhere.</p>
+
+<h3 id="error-handling">Error Handling</h3>
+
+<p><img src="/public/images/joyent-error-design-screenshot.png" alt="&lt;a href='https://www.joyent.com/node-js/production/design/errors'&gt;Joyent post on error handling in Node.js&lt;/a&gt;" /></p>
+<div class="caption"><a href="https://www.joyent.com/node-js/production/design/errors">Joyent post on
+error handling in Node.js</a></div>
+
+<p>If the above snippet isn’t enough, take a peek at the following:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">log</span><span class="p">.</span><span class="nx">fatal</span><span class="p">({</span>
+        <span class="na">code</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">err</span>
+    <span class="p">},</span> <span class="s1">'process exit'</span><span class="p">);</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">process</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'unhandledException'</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
+<span class="nx">process</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'unhandledRejection'</span><span class="p">,</span> <span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+</code></pre>
+</div>
+
+<p>Exception bubbling allows errors that should be handled at call-site propagate endlessly.
+Catch-all error handlers are just a workaround for poor design. Seamless bubbling makes
+it easy to ignore your error paths, which are arguably as important as your successful
+paths in critical software. It’s also much harder to debug the execution path of your
+program when something <em>n</em> level deeps can change the overall direction.
+Of course, it’s entirely possible to be thoughtful and handle every error in
+JavaScript, too, but it’s cumbersome since there’s no standardization in <em>how</em> errors
+are actually handled (<code class="highlighter-rouge">try/catch</code>, <code class="highlighter-rouge">.on('error')</code>, <code class="highlighter-rouge">.catch()</code>, etc.) and moreover,
+it’s easy to forget.</p>
+
+<h3 id="synchronous-code">Synchronous Code</h3>
+
+<p>Though async I/O is important, it’s not <em>everything</em>. If anything, I’d say forgetting
+this is Node’s biggest downside. Node forces you to think about concurrency everywhere,
+whereas Go, Lua, Python (though there are other problems there), and other languages
+allow you to incorporate it as needed without switching paradigms.</p>
+
+<p>You can–and I like to believe that I have– achieved this in Node with newer constructs like
+<a href="http://tobyho.com/2015/12/27/promise-based-coroutines-nodejs/">generator-based coroutines</a> and <a href="https://zeit.co/blog/async-and-await">Async/Await</a>, but they’re never first-class,
+and require loads of tribal knowledge in order to effectively utilize amongst
+<a href="https://www.promisejs.org/">all</a> <a href="http://callbackhell.com/">the</a> <a href="https://bjouhier.wordpress.com/2012/03/11/fibers-and-threads-in-node-js-what-for/">other</a> <a href="http://blog.yld.io/2015/12/15/using-an-event-emitter/">paradigms</a> <a href="https://github.com/substack/stream-handbook">the</a> <a href="http://zef.me/blog/6096/callback-free-harmonious-node-js">community</a> <a href="https://howtonode.org/step-of-conductor">follows</a>. If you don’t believe me, try teaching
+all this to a beginner from scratch.</p>
+
+<h2 id="and-beyond">And Beyond!</h2>
+
+<p>Now, I’m not saying Node.js is an awful platform. It did a great job at popularizing
+a convenient interface to asynchronous I/O, and it’s still better at some things, like
+parsing JSON quickly. That said, now, there are superior options, like Go.
+When I was stuck in Node land, I’d often assess other platforms by staring at examples
+and laughing along, and I’ve seen a lot of (but not all!) fellow JavaScript developers do
+the same, but, by stepping out of my comfort zone, I’ve learned that it’s impossible to
+effectively criticize something without developing a strong relationship with it,
+which for languages, includes debugging, working around abnormalities, and learning ins
+and outs. All platforms have their trade-offs, and analyzing them is the only way
+to make educated decisions on what to leave in or out of the next big thing™.</p>
+
+
+<hr>
+
+<a href="/">
+<h6>
+  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  Back to the list of posts
+</h6>
+</a>
+
+</main>
+
+<!-- <footer id="footer" style="position: absolute; bottom: 0; left: 0; right: 0; text-align: center;"> -->
+<footer id="footer">
+  <section id="footer-message">&copy;  Tejas Manohar. All rights reserved.</section>
+</footer>
+
+<script src="/public/js/prism.js"></script>
+<script src="//cdn.jsdelivr.net/cash/1.3.0/cash.min.js"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+  analytics.load("D3cc98obMFxPB9Kf96kAz6HuFnPe15Bf");
+  analytics.page();
+  }}();
+</script>
+
